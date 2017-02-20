@@ -1,0 +1,9 @@
+app-loading {
+    display: none;
+}
+
+#loading-bar-spinner {
+    top: 22px !important;
+    left: initial !important;
+    right: 58px;
+}

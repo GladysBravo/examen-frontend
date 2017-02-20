@@ -1,0 +1,157 @@
+@import '../../../common/styles/sass/_variables.scss';
+
+.no-login {
+    background-color: #2F323A;
+    padding: 0;
+    overflow: hidden;
+
+    .main-section {
+        overflow: hidden;
+    }
+
+    & + app-footer {
+        padding-left: 0;
+
+        .footer {
+            text-align: center;            
+        }
+    }
+}
+
+
+.md-input-group {
+    position: relative;
+
+    .md-input-group-addon {
+        color: #404040;
+        display: inline-block;
+        font-size: 1.6rem;
+        position: absolute;
+        width: 28px;
+    }
+
+    .md-form-group {
+        margin-left: 28px;
+    }
+}
+
+.login {
+     
+}
+
+.login-container {
+    margin: -198px 0 0 -210px;
+    position: fixed;
+    width: 420px;
+    top: 50%;
+    left: 50%;
+    height: 336px;
+
+    .login-block {
+        border-top: 5px solid $colorPrimary;
+
+        a {
+            font-size: .85rem;
+        }
+
+        .d-flex {
+
+            .custom-control {
+                margin-bottom: 15px;
+            }
+
+            .p-3, .p-5 {
+                padding: 0 !important;
+            }
+        }
+    }
+
+    .login-logo {
+        height: 60px;
+        color: #eee;
+        font-size: 30px;
+        line-height: 50px;
+        box-shadow: none;
+
+        small {
+            font-size: 16px;
+            color: #999;
+        }
+    }
+
+    .login-header {
+        position: absolute;
+        top: 10px;
+        right: 0;
+        height: 50px;
+        background: $colorPrimary;
+        color: white;
+        padding: 0 15px;
+        line-height: 50px;
+        border-radius: 5px 5px 0 0;
+        transition: width 1s ease 0s;
+    }
+
+    .input-group {
+        margin-bottom: 10px;
+    }
+
+    .card-header {
+        padding: 1.5rem 3rem;
+        font-size: 1.5rem;
+    }
+    .card-block {
+        padding: 1rem 3rem 2rem;
+    }
+}
+
+.card-flip-container {
+    -webkit-perspective: 800;
+    display: inline-block;
+    height: 235px;
+    position: relative;
+    width: 420px;
+    z-index: 1;
+}
+.card-flip {
+    box-shadow: 0px 0px 5px black;
+    height: 100%;
+    width: 100%;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: all 0.5s;
+}
+.card-flip-container.recovery .card-flip {
+    -webkit-transform: rotateY(180deg);
+}
+.card-flip .side {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    -webkit-backface-visibility: hidden;
+}
+.card-flip .front {
+    background-color: white;    
+    width: 100%;
+    padding: 0px 30px 25px 30px;
+}
+.card-flip .back {
+    -webkit-transform: rotateY(180deg);
+    background: #F0F0F0;
+    font-family: Helvetica, Verdana, Arial;    
+    padding: 0px 30px 25px 30px;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+
+    .alert {
+        margin: 15px -15px 0px -15px;
+        font-size: .9rem;
+    }
+    
+    .login-link {
+        bottom: 25px;
+        font-family: Montserrat, Arial, Helvetica, sans-serif;
+        left: 30px;
+        position: absolute;
+    }
+}
