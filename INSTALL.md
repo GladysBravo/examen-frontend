@@ -31,7 +31,7 @@ Instalación del proyecto para Desarrollo
 
 #### Configurar los datos de conexión a los servicios REST del backend
 
-    Cambie <SERVIDOR> por el IP del servidor o el nombre del dominio del backend en el archivo /path-del-proyecto/src/app/index.constants.js
+    Cambie <SERVIDOR> por el IP del servidor o el nombre del dominio del backend en el archivo /path-del-proyecto/src/app/app.constants.js
 
     .constant('authUrl', 'http://<SERVIDOR>/login/') // URL para autenticacion para el administrador
     .constant('restUrl', 'http://<SERVIDOR>/') // Rest
@@ -42,7 +42,7 @@ Instalación del proyecto para Desarrollo
 #### Iniciar servidor de autenticación fake (OPCIONAL)
     npm run server
 
-###Notas.-
+### Notas.-
 - El proyecto ya no require de bower solo de npm para la gestión de dependencias
 - Si el **Watch** de webpack no funciona debe ejecutar los siguientes comandos para ampliar el número de watch que permite el sistema operativo en linux:
 
