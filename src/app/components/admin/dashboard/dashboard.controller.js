@@ -4,12 +4,11 @@ import modalController from './dashboard-modal.controller.js';
 import modalTemplate from './dashboard.modal.html';
 
 class DashboardController {
-    constructor(restUrl, Message, Modal, DataService, $log) {
+    constructor(restUrl, Message, Modal, $log) {
         this.dt = new Date();
         this.Message = Message;
         this.Modal = Modal;
         this.restUrl = restUrl;
-        this.DataService = DataService;
         this.$log = $log;
     }
 
@@ -21,11 +20,6 @@ class DashboardController {
             {value: 4, text: 'Item cuatro'},
             {value: 5, text: 'Item cinco'}
         ];
-
-        this.DataService.get('test')
-        .then((response) => {
-            this.$log.log('response!!', response);
-        });
 
         this.opened = false;
 

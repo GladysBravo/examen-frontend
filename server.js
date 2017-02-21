@@ -26,7 +26,11 @@ serve.post('/auth', function (req, res) {
 });
 
 serve.get('/test', (req, res) => {
-    res.send({'hola' : 'mundo'});
+    res.send({
+        count: 2,
+        results: [{ name: 'christian', age: 21 }, { name: 'anthony', age: 88 }],
+        page: 1
+    });
 });
 // End Fake auth
 

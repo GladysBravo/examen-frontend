@@ -15,6 +15,7 @@ import uiRouter from 'angular-ui-router';
 import satellizer from 'satellizer';
 import loadingBar from 'angular-loading-bar';
 import ngSanitize from 'angular-sanitize';
+import ngResource from 'angular-resource';
 import uiSelect from 'ui-select';
 import toastr from 'angular-toastr';
 // import 'tether'; // Tether (required for Bootstrap 4.x)
@@ -31,6 +32,7 @@ const Common = angular
     .module('app.common', [
         loadingBar,
         ngSanitize,
+        ngResource,
         satellizer,
         toastr,
         'ngTable',

@@ -1,17 +1,21 @@
 'use strict';
 
 class UserController {
-    constructor(NgTableParams) {
+    constructor(NgTableParams, DataService, ngTableSimpleList) {
         "ngInject";
 
         this.NgTableParams = NgTableParams;
+        this.DataService = DataService;
+        this.ngTableSimpleList = ngTableSimpleList;
+    }
+
+    $onInit() {
+        this.tableParams();
     }
 
     tableParams() {
         return new this.NgTableParams({}, {
-            getData: function() {
-                
-            }
+            dataset: this.ngTableSimpleList
         });
     }
 }
