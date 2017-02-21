@@ -54,6 +54,6 @@ Instalación del proyecto para Desarrollo
 
 - Si al iniciar con ***npm start*** u otro comando se tiene el puerto ocupado executar el comando para detener el servicio:
 
-    sudo fuser [puerto]/tcp
-    Ej.- sudo fuser 8080/tcp
+    sudo fuser -k [puerto]/tcp
+    Ej.- sudo fuser -k 8080/tcp
 
