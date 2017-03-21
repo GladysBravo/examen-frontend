@@ -5,6 +5,8 @@ import modalTemplate from './dashboard.modal.html';
 
 class DashboardController {
     constructor(restUrl, Message, Modal, $log) {
+        'ngInject';
+        
         this.dt = new Date();
         this.Message = Message;
         this.Modal = Modal;

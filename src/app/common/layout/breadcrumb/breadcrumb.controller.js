@@ -2,7 +2,7 @@
 
 class BreadcrumbController {
     constructor(Storage, $location, BreadcrumbFactory, Util) {
-        'ng-inject';
+        'ngInject';
 
         this.Storage = Storage;
         this.$location = $location;

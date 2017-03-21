@@ -3,6 +3,8 @@
 class AppController {
 
     constructor($rootScope, $location, Storage, Auth, PageNoLogin, timeSessionExpired) {
+        'ngInject';
+
         this.$rootScope = $rootScope;
         this.$location = $location;
         this.Auth = Auth;

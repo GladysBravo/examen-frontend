@@ -3,7 +3,7 @@
 class AuthService {
 
     constructor($http, $auth, $location, $rootScope, Storage, SidenavFactory, BreadcrumbFactory, Util, timeSessionExpired) {
-        "ng-inject";
+        "ngInject";
 
         this.$http = $http;
         this.$auth = $auth;

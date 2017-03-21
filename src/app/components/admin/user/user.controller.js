@@ -2,7 +2,7 @@
 
 class UserController {
     constructor(NgTableParams, DataService, ngTableSimpleList) {
-        "ngInject";
+        'ngInject';
 
         this.NgTableParams = NgTableParams;
         this.DataService = DataService;

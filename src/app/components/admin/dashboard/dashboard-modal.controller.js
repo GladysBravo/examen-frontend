@@ -2,6 +2,8 @@
 
 class DashboardModalController {
     constructor($uibModalInstance, data) {
+        'ngInject';
+        
         this.items = data;
         this.$uibModalInstance = $uibModalInstance;
     }

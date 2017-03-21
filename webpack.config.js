@@ -90,7 +90,8 @@ module.exports = (function makeWebpackConfig () {
       exclude: [/node_modules/, /vendor/]
     }
     ],
-    loaders: [{
+    loaders: [    
+    {
       /**
        * JS LOADER
        * Reference: https://github.com/babel/babel-loader
@@ -98,10 +99,7 @@ module.exports = (function makeWebpackConfig () {
        * Compiles ES6 and ES7 into ES5 code
        */
       test: /\.js$/,
-      loader: 'babel',
-      query: {
-        presets: ['es2015', 'stage-2']
-      },
+      loaders: ['ng-annotate', 'babel?presets[]=es2015&presets[]=stage-2'],
       exclude: /node_modules/
     },
     { /** This loader config depend on line 178 */
@@ -162,11 +160,6 @@ module.exports = (function makeWebpackConfig () {
     configFile: './.eslintrc'
   };
 
-  /** Compressing classNames on production */
-  if (isProd) {
-    config.module.loaders[1].loader = ExtractTextPlugin.extract('style', 'css?modules&sourceMap&localIdentName=[local]_[hash:base64:10]!postcss');
-  }
-
   /**
    * PostCSS
    * Reference: https://github.com/postcss/autoprefixer-core
@@ -174,7 +167,7 @@ module.exports = (function makeWebpackConfig () {
    */
   config.postcss = function (bundler) {
     return [
-      require('postcss-inline-comment')(),
+      require('postcss-strip-inline-comments'),
       require('postcss-hexrgba'),
       require('postcss-size'),
       require('precss')(),
@@ -212,11 +205,7 @@ module.exports = (function makeWebpackConfig () {
      * Extract css files
      * Disabled when in test mode or not in build mode
      */
-    new ExtractTextPlugin('[name].[hash].css', {disable: !isProd}),
-    new ngAnnotatePlugin({
-        add: true,
-        // other ng-annotate options here 
-    })
+    new ExtractTextPlugin('[name].[hash].css', {disable: !isProd})
   );
 
   /** Add build specific plugins */
