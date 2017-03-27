@@ -31,7 +31,7 @@ Instalación del proyecto para Desarrollo
 
 #### Configurar los datos de conexión a los servicios REST del backend
 
-    Cambie <SERVIDOR> por el IP del servidor o el nombre del dominio del backend en el archivo /path-del-proyecto/src/app/app.constants.js
+    Cambie <SERVIDOR> por el IP del servidor o el nombre del dominio del backend en el archivo /path-del-proyecto/src/app/app.config.js
 
     .constant('authUrl', 'http://<SERVIDOR>/login/') // URL para autenticacion para el administrador
     .constant('restUrl', 'http://<SERVIDOR>/') // Rest
@@ -47,9 +47,11 @@ Instalación del proyecto para Desarrollo
 - Si el **Watch** de webpack no funciona debe ejecutar los siguientes comandos para ampliar el número de watch que permite el sistema operativo en linux:
 
 
-    echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+    echo fs.inotify.max_user_watches=1048576 | sudo tee -a /etc/sysctl.conf
     
     sudo sysctl -p
+
+Visitar la web para más información https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
     
 
 - Si al iniciar con ***npm start*** u otro comando se tiene el puerto ocupado executar el comando para detener el servicio:
@@ -57,3 +59,40 @@ Instalación del proyecto para Desarrollo
     sudo fuser -k [puerto]/tcp
     Ej.- sudo fuser -k 8080/tcp
 
+
+Instalación del proyecto para Producción
+===============================
+
+#### Instalando dependencias npm
+    npm install
+
+#### Configurar los datos de conexión a los servicios REST del backend
+
+    Cambie <SERVIDOR> por el IP del servidor o el nombre del dominio del backend en el archivo /path-del-proyecto/src/app/app.config.js
+
+    .constant('authUrl', 'http://<SERVIDOR>/login/') // URL para autenticacion para el administrador
+    .constant('restUrl', 'http://<SERVIDOR>/') // Rest
+
+#### Crear los archivos minificados
+    npm reun build
+
+#### Iniciar el servidor para los archivos minificados
+    npm run server
+
+### ¡Importante!.-
+Use siempre la anotación 'ngInject' en los constructores o donde se requiera inyectar una dependencia angular para que el minificado sea exitoso.
+
+Ejemplo:
+    // En los constructores que requieran dependencias
+    constructor(Dependencia1, Dependencia2, ...) {
+        'ngInject';
+
+        ...
+    }
+
+    // En los config de angular que requieran dependencias
+    angular.config((Dependencia1, Dependencia2, ...) => {
+        'ngInject';
+
+        ...
+    })

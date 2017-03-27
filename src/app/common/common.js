@@ -19,6 +19,8 @@ import ngResource from 'angular-resource';
 import uiSelect from 'ui-select';
 import toastr from 'angular-toastr';
 // import 'tether'; // Tether (required for Bootstrap 4.x)
+import '../../../node_modules/angular-formly/dist/formly';
+import '../../../node_modules/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap';
 import '../../../node_modules/ng-table/bundles/ng-table';
 
 import Config from './common.config';
@@ -34,6 +36,7 @@ const Common = angular
         ngSanitize,
         ngResource,
         satellizer,
+        'formlyBootstrap',
         toastr,
         'ngTable',
         uiRouter,

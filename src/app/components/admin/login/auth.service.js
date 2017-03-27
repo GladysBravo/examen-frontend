@@ -10,6 +10,7 @@ class AuthService {
         this.$rootScope = $rootScope;
         this.$location = $location;
         this.Storage = Storage;
+        this.Util = Util;
         this.SidenavFactory = SidenavFactory;
         this.BreadcrumbFactory = BreadcrumbFactory;
         this.timeSessionExpired = timeSessionExpired;

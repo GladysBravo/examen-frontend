@@ -1,6 +1,6 @@
 'use strict';
 
-import modalController from './dashboard-modal.controller.js';
+import modalController from './dashboard.modal.controller.js';
 import modalTemplate from './dashboard.modal.html';
 
 class DashboardController {

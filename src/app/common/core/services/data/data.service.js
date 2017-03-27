@@ -68,7 +68,7 @@ class DataService {
     _http(method, url, data) {
 
         url = this.getUrl(url, data);
-        this.$log.log(method.toUpperCase(), url, data || '');
+        this.$log.log('DataService:' ,method.toUpperCase(), url, data || '');
 
         let setting = {
             method,

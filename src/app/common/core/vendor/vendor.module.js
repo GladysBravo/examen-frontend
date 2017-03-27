@@ -14,6 +14,7 @@ import Timepicker from './angular-ui-bootstrap/src/timepicker';
 import Tooltip from './angular-ui-bootstrap/src/tooltip';
 
 import Waves from './waves/waves.module';
+import Formly from './formly/formly.module';
 
 import './vendor.css';
 
@@ -30,7 +31,8 @@ const Vendor = angular
         Tabs,
         Timepicker,
         Tooltip,
-        Waves
+        Waves,
+        Formly
     ])
     .name;
 

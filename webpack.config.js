@@ -90,7 +90,7 @@ module.exports = (function makeWebpackConfig () {
       exclude: [/node_modules/, /vendor/]
     }
     ],
-    loaders: [    
+    loaders: [
     {
       /**
        * JS LOADER

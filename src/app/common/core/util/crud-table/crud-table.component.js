@@ -3,35 +3,20 @@
 import controller from './crud-table.controller';
 
 const CrudTableComponent = {
-    bindings: {},
+    bindings: {
+        url: '<',
+        title: '<'
+    },
     controller,
     template: `
         <div class="crud-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Uno</th>
-                        <th>Dos</th>
-                        <th>Tres</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>8</td>
-                        <td>9</td>
-                    </tr>
-                </tbody>
+            <div class="btn-container">
+                <button class="btn btn-primary" ng-click="$ctrl.add()" type="button"><i class="fa fa-add"></i> Agregar</button>
+            </div>
+            <table ng-table-dynamic="$ctrl.tableParams with $ctrl.headers" class="table table-striped table-condensed ng-table-responsive">
+                <tr ng-repeat="row in $data">
+                    <td ng-repeat="col in $columns">{{ row[col.field] | datetime:'convert' }}</td>
+                </tr>
             </table>
         </div>
     `

@@ -17,8 +17,7 @@ class MdEffect {
                 className = [$attr.mdEffect];
             }
         }
-        if ($attr.class.indexOf('btn-secondary') != -1 || 
-            $attr.class.indexOf('btn-default') != -1) {
+        if ($attr.class.indexOf('btn-secondary') != -1 || $attr.class.indexOf('btn-default') != -1) {
             className = [];
         }
         Waves.attach($elem, className);

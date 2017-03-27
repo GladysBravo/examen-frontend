@@ -1,6 +1,7 @@
 'use strict';
 
 import CrudTableComponent from './crud-table.component';
+import './crud-table.scss';
 
 const CrudTableModule = angular
     .module('app.crud-table', [])
