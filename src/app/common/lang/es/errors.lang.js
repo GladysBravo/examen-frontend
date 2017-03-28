@@ -13,7 +13,8 @@ const Errors = {
     '503': 'El sistema se encuentra en mantenimiento en estos momentos, vuelva a intentarlo más tarde por favor.',
     // '504': 'Gateway timeout - Tiempo de espera agota.', // Esto debe ser implementado en el frontend para reintentar las peticiones
     'connection': 'No se pudo establecer conexión con el servidor.',
-    'cancelRequest': 'Petición cancelada.'
+    'cancelRequest': 'Petición cancelada.',
+    'validation': 'Error de validación'
 };
 
 export default Errors;

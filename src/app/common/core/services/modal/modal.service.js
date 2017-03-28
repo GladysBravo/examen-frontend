@@ -34,7 +34,7 @@ class ModalService {
         setData(config, setting, 'eventCancel');
         setData(config, setting, 'eventOk');
 
-        this.$uibModal.open(setting);
+        return this.$uibModal.open(setting);
     }    
 
     alert(message, callbackOk, title) {

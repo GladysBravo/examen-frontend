@@ -28,7 +28,10 @@ class DataService {
     }
 
     getUrl(url, id) {
-        id = typeof id == 'string' ? `/${id}` : typeof id == 'object' && id.id ? `${id.id}/`: '';
+        id = (typeof id == 'string' || typeof id == 'number') ? `${id}` : typeof id == 'object' && id.id ? `${id.id}`: '';
+        if (url[url.length - 1] != '/' && id.length > 1) {
+            id = `/${id}`;
+        }
         return this.PATERN_HOST.test(url)? (url + id) : this.restUrl + url + id;
     }
 
@@ -68,7 +71,7 @@ class DataService {
     _http(method, url, data) {
 
         url = this.getUrl(url, data);
-        this.$log.log('DataService:' ,method.toUpperCase(), url, data || '');
+        this.$log.log('DataService:', method.toUpperCase(), url, data || '');
 
         let setting = {
             method,
@@ -76,7 +79,8 @@ class DataService {
             timeout: this.canceler.promise
         };
 
-        if (typeof data == 'object' && Object.key(data).length) {
+        if (typeof data == 'object' && Object.keys(data).length) {
+            delete data.id;
             setting.data = data;
         }
 
@@ -110,45 +114,45 @@ class DataService {
     }
 
     msgError(error) {
-        let statusErrors = [500, 404, 409, 403, 401, 502];
-        // let statusWarnings = [503, 409];
+        var statusErrors = [500, 404, 409, 403, 401, 400, 502];
 
         if (error.status === 408 || error.status === 504) {
             return error;
         } else if (this.errorsLang[error.status]) {
-            this.Message[ statusErrors.indexOf(error.status) != -1 ? 'error' : 'warning' ](error.data.mensaje && typeof error.data.mensaje == 'string' ? error.data.mensaje : this.errorsLang[error.status]);
+            this.Message[ statusErrors.indexOf(error.status) != -1 ? 'error' : 'warning' ](error.data.message && typeof error.data.message == 'string' ? error.data.message : this.parseError(error.data) || this.errorsLang[error.status], error.data.errors ? this.errorsLang.validation : null);
         } else if (this.cancel) {
             this.Message.warning(this.errorsLang.cancelRequest);
             this.cancel = false;
         } else {
-            this.Message.error(this.parseError(error.data) || this.errorsLang.connection);
+            this.Message.error(this.parseError(error.data) || this.errorsLang.connection, error && error.data && error.data.message ? error.data.message : null);
         }
 
         return null;
     }
 
     parseError(error) {
-        let message = [];
+        var message = [];
         if (error) {
-            if (error.detail || error.error) {
-                return error.detail || error.error;
-            }
-            if (Object.keys({}).length === 0) {
-                return error;
-            }
-            for (let i in error) {
-                let label = i;
-                if (this.formly) {
-                    for (let el of this.formly) {
-                        if (el.key == i) {
-                            label = el.templateOptions.label;
-                            break;
-                        }
-                    }
+            if (error.errors) {                
+                if (error.detail || error.error) {
+                    return error.detail || error.error;
                 }
-                message.push('<strong>' + label + ':</strong> ' + (this.Util.toType(error[i]) == 'array' ? error[i].join(', ') : error[i]));
+                if (Object.keys(error.errors).length === 0) {
+                    return error;
+                }
+
+                error = error.errors;
+                for (let i in error) {
+                    message.push('<strong>' + (error[i].label || i) + ':</strong> ' + (this.Util.toType(error[i].errors) == 'array' ? error[i].errors.join(', ') : error[i].errors));
+                }
+                return message.join('<br>');
+            } else if (error.errorType && error.errorType == 'ValidationError') {
+                error = error.property;
+                for (let i in error) {
+                    message.push('<strong>' + (error[i].label || i) + ':</strong> ' + (this.Util.toType(error[i].errors) == 'array' ? error[i].errors.join(', ') : error[i].errors));
+                }
+                return message.join('<br>');
             }
-            return message.join('<br>');
         }
         return null;
     }
