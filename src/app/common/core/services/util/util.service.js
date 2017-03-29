@@ -126,16 +126,6 @@ class UtilService {
         return [false,false];
     }
 
-    lengthOptions(data, key) {
-        for (var i in data) {
-            if (data[i].key == key && data[i].templateOptions && data[i].templateOptions.options) {
-                return data[i].templateOptions.options.length;
-            }
-        }
-        return 0;
-    }    
-
-
     getKeys(data) {
         var types = {};
 

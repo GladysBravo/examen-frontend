@@ -110,6 +110,15 @@ class CrudTableService {
         return data;
     }
 
+    lengthOptions(data, key) {
+        for (var i in data) {
+            if (data[i].key == key && data[i].templateOptions && data[i].templateOptions.options) {
+                return data[i].templateOptions.options.length;
+            }
+        }
+        return 0;
+    }
+
     // formatTime(time) {
     //     time = time.split(':');
     //     return [time[0], time[1]].join(':');

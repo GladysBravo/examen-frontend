@@ -55,8 +55,12 @@ class DataService {
         return this._http('patch', url, data);
     }
 
-    remove(url, id) {
+    delete(url, id) {
         return this._http('delete', url, id);
+    }
+
+    remove(url, id) {
+        return this.delete(url, id);
     }
 
     list(url, query) {

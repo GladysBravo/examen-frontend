@@ -6,7 +6,10 @@ const CrudTableComponent = {
     bindings: {
         url: '<',
         title: '<',
-        fields: '<'
+        fields: '<',
+        fieldsCreate: '<',
+        fieldsUpdate: '<',
+        fieldsSave: '<',
     },
     controller,
     template: `
@@ -18,8 +21,10 @@ const CrudTableComponent = {
             <table ng-table-dynamic="$ctrl.tableParams with $ctrl.headers" class="table table-striped table-condensed ng-table-responsive">
                 <tr ng-repeat="row in $data">
                     <td ng-repeat="col in $columns">{{ row[col.field] | datetime:'convert' }}</td>
-                    <td data-title="'Editar'"><button md-effect class="btn btn-default btn-xs" type="button" ng-click="$ctrl.edit(row)"><i class="fa fa-edit"></i></button></td>
-                    <td data-title="'Eliminar'"><button md-effect class="btn btn-danger btn-xs" type="button" ng-click="$ctrl.delete(row)"><i class="fa fa-trash"></i></button></td>
+                    <td data-title="'Acciones'">
+                        <button md-effect class="btn btn-default btn-xs" type="button" ng-click="$ctrl.edit(row)"><i class="fa fa-edit"></i></button>
+                        <button md-effect class="btn btn-danger btn-xs" type="button" ng-click="$ctrl.delete(row)"><i class="fa fa-trash"></i></button>
+                    </td>
                 </tr>
             </table>
         </div>

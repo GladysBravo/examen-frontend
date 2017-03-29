@@ -12,6 +12,7 @@ class CrudTableController {
         this.NgTableParams = NgTableParams;
         this.Modal = Modal;
         this.Message = Message;
+        this.Util = Util;
         this.CrudTable = CrudTable;
         this.ArrayUtil = ArrayUtil;
         this.$log = $log;
@@ -39,6 +40,11 @@ class CrudTableController {
                 hideExpression: 'true'    
             }
         ];
+
+        this.buttons = `
+            <button md-effect class="btn btn-default btn-xs" type="button" ng-click="$ctrl.edit(row)"><i class="fa fa-edit"></i></button>
+            <button md-effect class="btn btn-danger btn-xs" type="button" ng-click="$ctrl.delete(row)"><i class="fa fa-trash"></i></button>
+        `;
     }
 
     $onInit () {
@@ -62,8 +68,9 @@ class CrudTableController {
     getFields() {
         this.DataService.options(this.url)
         .then(response => {
-            this.fieldsData = this.CrudTable.filterFields(response, this.fields);
+            let fields = response;
 
+            this.fieldsData = this.CrudTable.filterFields(fields, this.fields);
             this.idKey = this.CrudTable.getId(this.fieldsData);
             this.formlyDefault[0].key = this.idKey;
 
@@ -83,7 +90,31 @@ class CrudTableController {
             if (this.editable) {
                 this.types = this.CrudTable.getKeys(this.fieldsData);
             }
-            this.getData();            
+            this.getData();
+
+            /**
+             * Campos para el formulario de adición
+             */
+            if (this.Util.toType(this.fieldsCreate) == 'array') {
+                this.fieldsCreate = this.CrudTable.filterFields(fields, this.fieldsCreate);
+                this.fieldsCreate = this.CrudTable.addPropertiesFormly(this.fieldsCreate, this.formly);
+            }
+
+            /**
+             * Campos para el formulario de actualización
+             */
+            if (this.Util.toType(this.fieldsUpdate) == 'array') {
+                this.fieldsUpdate = this.CrudTable.filterFields(fields, this.fieldsUpdate);
+                this.fieldsUpdate = this.CrudTable.addPropertiesFormly(this.fieldsUpdate, this.formly);
+            }
+
+            /**
+             * Campos para el formulario de adición/actualización
+             */
+            if (this.Util.toType(this.fieldsSave) == 'array') {
+                this.fieldsSave = this.CrudTable.filterFields(fields, this.fieldsSave);
+                this.fieldsSave = this.CrudTable.addPropertiesFormly(this.fieldsSave, this.formly);
+            }
         });
     }
 
@@ -107,26 +138,100 @@ class CrudTableController {
     getData() {
         this.tableParams = new this.NgTableParams({}, { 
             getData: params => {
-                this.$log.log('params.url():', params.url(), params);
+                // this.$log.log('params.url():', params.url(), params);
                 return this.DataService.list(this.url, {
                     limit: params.url().count,
                     page: params.url().page
                 }).then(response => {
                     if (response.results) {                   
                         params.total(response.count);
-                        return response.results;
+                        return this.filterItems(response.results);
                     }
                 });
             }
         });
     }
 
+    filterItems(data) {
+        let fields = this.fields !== undefined;
+        let fks = this.fks !== undefined;
+        let relations = this.relations !== undefined;
+        let array = [];
+        for (let i in data) {
+            for (let j in data[i]) {
+                if (fields && this.fields.indexOf(j) == -1) {
+                    delete data[i][j];
+                } else {
+                    if (this.editable === undefined) {
+                        if (typeof data[i][j] == 'boolean') {
+                            data[i][j] = data[i][j] ? 'check_circle_success' : 'check_circle_gray';
+                        } else if (relations && this.relations[j]) {
+                            data[i][j] = this.CrudTable.searchFieldData(this.relations[j], data[i][j]);
+                        } else if (fks && this.fks.indexOf(j) != -1) {
+                            if (this.Util.toType(data[i][j]) == 'array') {
+                                let l = this.CrudTable.lengthOptions(this.fieldsData, j);
+                                if (l > 1 && l == data[i][j].length) {
+                                    data[i][j] = 'Todos';
+                                } else {
+                                    let text = [];
+                                    for (let e of data[i][j]) {
+                                        text.push(this.CrudTable.getFkData(this.fieldsData, j, e)); 
+                                    }
+                                    data[i][j] = text.join(', ');
+                                }
+                            } else {
+                                data[i][j] = this.CrudTable.getFkData(this.fieldsData, j, data[i][j]);
+                            }
+                        } else if (this.Util.toType(data[i][j]) == 'array') {
+                            data[i][j] = data[i][j][0];
+                        }
+                    }
+                }
+            }
+            array.push(this.orderItem(data[i], this.fieldsData, i));
+        }
+        return array;
+    }
+
+    orderItem(data, fields, pos) {
+        if (fields === undefined || fields.length === 0) {
+            return data;
+        }
+
+        let item = {};
+        for (let i in fields) {
+            let field = fields[i].key;
+            if (data[field] !== undefined) {
+                if (this.editable) {
+                    if (typeof data[field] == 'string' && !/[a-zA-Z]+/g.test(data[field]) && /^-?[0-9.]+\-?[0-9]+\-?[0-9]*$/g.test(data[field]) && data[field].length == 10) {
+                        let date = data[field].split('-');
+                        this.dataGrid[pos + '_' + field] = new Date(date[0], date[1]-1, date[2]);
+                    } else {
+                        this.dataGrid[pos + '_' + field] = data[field];
+                    }
+                    item[field] = pos + '_' + field;
+                } else {
+                    item[field] = data[field];
+                }
+            }
+        }
+
+        return item;
+    }
+
     add(item) {
+        let fields = null;
+        if (item) {
+            fields = this.fieldsSave || this.fieldsUpdate || this.fieldsData;
+        } else {
+            fields = this.fieldsSave || this.fieldsCreate || this.fieldsData;
+        }
+
         let modalInstance = this.Modal.show({
             template: modalTemplate,
             controller: modalController,
             data: {
-                fields: this.fieldsData,
+                fields: fields,
                 url: this.url,
                 title: this.ngTitle,
                 idKey: this.idKey,
@@ -149,16 +254,19 @@ class CrudTableController {
         this.DataService.get(this.url, item[this.idKey])
         .then(response => {
             if (response) {
-                this.$log.log('item!', response);
-                if (response) {
-                    this.add(response);
-                }
+                this.add(response);
             }
         });
     }
 
-    delete() {
-
+    delete(item) {
+        this.Modal.confirm('¿Deséa eliminar este registro?', () => {            
+            this.DataService.delete(this.url, item[this.idKey])
+            .then(() => {
+                this.Message.success('Su registro fue eliminado correctamente.');
+                this.refresh();                
+            });
+        });
     }
 }
 
