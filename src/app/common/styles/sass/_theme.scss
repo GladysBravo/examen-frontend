@@ -155,6 +155,11 @@ $btn-danger-border:              $btn-danger-bg;
   }
 }
 
+.btn-sm, .btn-group-sm > .btn {
+  padding: 0.3rem 0.6rem;
+  letter-spacing: 0;
+}
+
 #toast-container > div, 
 .popover, 
 .btn[md-effect],

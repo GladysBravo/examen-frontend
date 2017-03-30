@@ -18,12 +18,24 @@ const CrudTableComponent = {
                 <button class="btn btn-primary" ng-click="$ctrl.add()" type="button"><i class="fa fa-add"></i> Agregar</button>
                 <button class="btn btn-default" type="button" ng-click="$ctrl.refresh()"><i class="fa fa-refresh"></i></button>
             </div>
-            <table ng-table-dynamic="$ctrl.tableParams with $ctrl.headers" class="table table-striped table-condensed ng-table-responsive">
+            <form name="$ctrl.searchForm" novalidate ng-submit="$ctrl.search()">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Escriba su búsqueda aquí" name="searchTerm" ng-model="$ctrl.searchTerm" required />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit" ng-disabled="$ctrl.searchForm.$invalid">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+            <table ng-table-dynamic="$ctrl.tableParams with $ctrl.headers" 
+                   class="table table-striped table-condensed ng-table-responsive" 
+                   show-filter="$ctrl.showFilter">
                 <tr ng-repeat="row in $data">
-                    <td ng-repeat="col in $columns">{{ row[col.field] | datetime:'convert' }}</td>
-                    <td data-title="'Acciones'">
-                        <button md-effect class="btn btn-default btn-xs" type="button" ng-click="$ctrl.edit(row)"><i class="fa fa-edit"></i></button>
-                        <button md-effect class="btn btn-danger btn-xs" type="button" ng-click="$ctrl.delete(row)"><i class="fa fa-trash"></i></button>
+                    <td ng-repeat="col in $columns">{{ row[col.field] | datetime: 'convert' }}</td>
+                    <td data-title="'Acciones'" ng-if="true" class="btn-actions">
+                        <button md-effect class="btn btn-default btn-sm" type="button" ng-click="$ctrl.edit(row)"><i class="fa fa-edit"></i></button>
+                        <button md-effect class="btn btn-danger btn-sm" type="button" ng-click="$ctrl.delete(row)"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
             </table>

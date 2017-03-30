@@ -5,9 +5,10 @@ import modalTemplate from './crud-table.modal.html';
 
 class CrudTableController {
 
-    constructor(DataService, NgTableParams, Modal, CrudTable, Util, ArrayUtil, Message, $log) {
+    constructor($scope, DataService, NgTableParams, Modal, CrudTable, Util, ArrayUtil, Message, $log) {
         'ngInject';
 
+        this.$scope = $scope;
         this.DataService = DataService;
         this.NgTableParams = NgTableParams;
         this.Modal = Modal;
@@ -39,16 +40,13 @@ class CrudTableController {
                 },
                 hideExpression: 'true'    
             }
-        ];
-
-        this.buttons = `
-            <button md-effect class="btn btn-default btn-xs" type="button" ng-click="$ctrl.edit(row)"><i class="fa fa-edit"></i></button>
-            <button md-effect class="btn btn-danger btn-xs" type="button" ng-click="$ctrl.delete(row)"><i class="fa fa-trash"></i></button>
-        `;
+        ];        
     }
 
     $onInit () {
         this.getFields();
+
+        this.showFilter = true;
     }
 
     addOptionSelected(data, options) {
@@ -121,11 +119,13 @@ class CrudTableController {
     setHeaders(fields) {
         let headers = [];            
         for (let field of fields) {
-            headers.push({ 
+            headers.push({
                 field: field.key, 
                 title: field.templateOptions.label, 
-                headerTitle: field.templateOptions.label, 
-                show: true 
+                headerTitle: field.templateOptions.label,
+                sortable: field.key,
+                filter: { [field.key] : field.templateOptions.type },
+                show: field.key != this.idKey 
             });
         }
         this.headers = headers;
@@ -138,18 +138,61 @@ class CrudTableController {
     getData() {
         this.tableParams = new this.NgTableParams({}, { 
             getData: params => {
-                // this.$log.log('params.url():', params.url(), params);
-                return this.DataService.list(this.url, {
-                    limit: params.url().count,
-                    page: params.url().page
-                }).then(response => {
-                    if (response.results) {                   
+                let data = params.url();
+                let query = {
+                    limit: data.count,
+                    page: data.page,
+                };
+                let sort = this.getSorting(data);
+                if (sort) {
+                    query.order = sort;
+                }
+                let filters = this.getFilters(data);
+                if (filters.length) {
+                    if (filters[0].crudtable_search_term) {
+                        query.filter = filters[0].crudtable_search_term;
+                    } else {
+                        for (let i in filters) {
+                            let key = Object.keys(filters[i])[0]
+                            query[key] = filters[i][key];
+                        }
+                        // query.filter = JSON.stringify(filters);
+                    }
+                }
+
+                this.$log.log('data:', data);
+                return this.DataService.list(this.url, query)
+                .then(response => {
+                    if (response.results) {
                         params.total(response.count);
                         return this.filterItems(response.results);
                     }
                 });
             }
         });
+    }
+
+    getSorting(params) {
+        for (let key in params) {
+            if (key.indexOf('sorting') != -1) {
+                return (params[key] == 'desc' ? "-" : "") + this.removeCorchete(key, 'sorting');
+            }
+        }
+        return null;
+    }
+
+    getFilters(params) {
+        let filters = [];
+        for (let key in params) {
+            if (key.indexOf('filter') != -1) {
+                filters.push({ [this.removeCorchete(key, 'filter')] : params[key] });
+            }
+        }
+        return filters;
+    }
+
+    removeCorchete(string, search) {
+        return string.replace(`${search}[`, '').replace(']', '');
     }
 
     filterItems(data) {
@@ -268,6 +311,11 @@ class CrudTableController {
             });
         });
     }
+
+    search() {
+        this.tableParams.filter({ 'crudtable_search_term': this.searchTerm });
+    }
+
 }
 
 export default CrudTableController;
