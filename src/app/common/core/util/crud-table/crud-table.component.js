@@ -14,22 +14,24 @@ const CrudTableComponent = {
     controller,
     template: `
         <div class="crud-table">
-            <div class="btn-container">
-                <button class="btn btn-primary" ng-click="$ctrl.add()" type="button"><i class="fa fa-add"></i> Agregar</button>
-                <button class="btn btn-default" type="button" ng-click="$ctrl.refresh()"><i class="fa fa-refresh"></i></button>
-            </div>
-            <form name="$ctrl.searchForm" novalidate ng-submit="$ctrl.search()">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Escriba su búsqueda aquí" name="searchTerm" ng-model="$ctrl.searchTerm" required />
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit" ng-disabled="$ctrl.searchForm.$invalid">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
+            <div class="d-flex justify-content-between">
+                <div class="btn-container p-2">
+                    <button class="btn btn-primary" md-effect ng-click="$ctrl.add()" type="button" uib-tooltip="Agregar nuevo registro"><i class="fa fa-plus"></i> Agregar</button>
+                    <button class="btn btn-default" md-effect type="button" ng-click="$ctrl.refresh()" uib-tooltip="Actualizar tabla"><i class="fa fa-refresh"></i></button>
                 </div>
-            </form>
+                <form name="$ctrl.searchForm" class="form-search p-2" novalidate ng-submit="$ctrl.search()">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Escriba su búsqueda aquí" name="searchTerm" ng-model="$ctrl.searchTerm" required />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit" ng-disabled="$ctrl.searchForm.$invalid">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
             <table ng-table-dynamic="$ctrl.tableParams with $ctrl.headers" 
-                   class="table table-striped table-condensed ng-table-responsive" 
+                   class="table table-striped table-condensed table-responsive" 
                    show-filter="$ctrl.showFilter">
                 <tr ng-repeat="row in $data">
                     <td ng-repeat="col in $columns">{{ row[col.field] | datetime: 'convert' }}</td>

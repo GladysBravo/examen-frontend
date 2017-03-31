@@ -49,6 +49,14 @@ class CrudTableController {
         this.showFilter = true;
     }
 
+    renderLabels(params) {
+        setTimeout(() => {
+            document.querySelector('.ng-table-counts').setAttribute('data-content', 'Filas: ');
+            document.querySelector('.ng-table-pagination').setAttribute('data-content', `${params.ini} al ${params.end} de ${params.total} Registros.`);
+            document.querySelector('.ng-table-filters .filter:last-child').setAttribute('data-content', 'Acciones');
+        }, 100);
+    }
+
     addOptionSelected(data, options) {
         for (let i in data) {
             if (data[i].type == 'select') {
@@ -153,7 +161,7 @@ class CrudTableController {
                         query.filter = filters[0].crudtable_search_term;
                     } else {
                         for (let i in filters) {
-                            let key = Object.keys(filters[i])[0]
+                            let key = Object.keys(filters[i])[0];
                             query[key] = filters[i][key];
                         }
                         // query.filter = JSON.stringify(filters);
@@ -165,7 +173,13 @@ class CrudTableController {
                 .then(response => {
                     if (response.results) {
                         params.total(response.count);
-                        return this.filterItems(response.results);
+                        let items = this.filterItems(response.results);
+                        this.renderLabels({
+                            ini: (query.page - 1) * query.limit + 1,
+                            end: query.page * query.limit < response.count ? query.page * query.limit : response.count,
+                            total: response.count
+                        });
+                        return items;
                     }
                 });
             }

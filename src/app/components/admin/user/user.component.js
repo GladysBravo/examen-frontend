@@ -7,7 +7,7 @@ const UserComponent = {
     controller,
     template: `
         <div class="container">
-            <h2 class="page-title"><i class="fa fa-user"></i> Usuarios <small><strong>del sistema</strong></small></div></h2>
+            <h2 class="page-title"><i class="fa fa-user"></i> Usuarios <small><strong>del sistema</strong></small></h2>
             <div class="card">
                 <div class="card-block">
                     <crud-table url="$ctrl.url" 
