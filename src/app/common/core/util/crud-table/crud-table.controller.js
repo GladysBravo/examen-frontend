@@ -330,6 +330,11 @@ class CrudTableController {
         this.tableParams.filter({ 'crudtable_search_term': this.searchTerm });
     }
 
+    cleanSearch() {
+        this.searchTerm = '';
+        this.refresh();
+    }
+
 }
 
 export default CrudTableController;

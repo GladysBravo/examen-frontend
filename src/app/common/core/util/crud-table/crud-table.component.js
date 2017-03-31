@@ -21,9 +21,14 @@ const CrudTableComponent = {
                 </div>
                 <form name="$ctrl.searchForm" class="form-search p-2" novalidate ng-submit="$ctrl.search()">
                     <div class="input-group">
+                        <span class="input-group-btn" ng-if="$ctrl.searchTerm.length">
+                            <button class="btn btn-default" type="button" ng-click="$ctrl.cleanSearch()" uib-tooltip="Limpiar búsqueda">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </span>
                         <input type="text" class="form-control" placeholder="Escriba su búsqueda aquí" name="searchTerm" ng-model="$ctrl.searchTerm" required />
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit" ng-disabled="$ctrl.searchForm.$invalid">
+                            <button class="btn btn-default" type="submit" ng-disabled="$ctrl.searchForm.$invalid" uib-tooltip="Buscar en la tabla">
                                 <i class="fa fa-search"></i>
                             </button>
                         </span>
