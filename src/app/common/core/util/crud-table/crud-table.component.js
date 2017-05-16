@@ -10,6 +10,7 @@ const CrudTableComponent = {
         fieldsCreate: '<',
         fieldsUpdate: '<',
         fieldsSave: '<',
+        fks: '<'
     },
     controller,
     template: `

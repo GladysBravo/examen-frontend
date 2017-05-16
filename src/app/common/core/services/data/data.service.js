@@ -36,7 +36,7 @@ class DataService {
     }
 
     options(url) {
-        return this._http('options', url);
+        return this._http('get', url + '/fields');
     }
 
     get(url, id) {

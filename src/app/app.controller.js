@@ -15,7 +15,7 @@ class AppController {
 
     $onInit () {
 
-        this.$rootScope.auth = this.Storage.existUser();
+        this.$rootScope.auth = this.Auth.isAuthenticated();
 
         // Verificando si se está logueado
         if (this.$rootScope.auth) {

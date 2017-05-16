@@ -23,8 +23,8 @@ class LoginController {
 
     signin() {
         this.Auth.signin({
-            username: this.username,
-            password: this.password
+            usuario: this.username,
+            contrasena: this.password
         });
     }
 

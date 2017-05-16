@@ -105,6 +105,10 @@ class AuthService {
             this.$location.path('login');
         });
     }
+
+    isAuthenticated () {
+        return this.$auth.isAuthenticated();
+    }
 }
 
 export default AuthService;
