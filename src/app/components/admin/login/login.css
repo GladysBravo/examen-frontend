@@ -106,7 +106,11 @@
 }
 
 .card-flip-container {
-    -webkit-perspective: 800;
+    -webkit-perspective: 800px;
+    -moz-perspective: 800px;
+    -ms-perspective:800px;
+    perspective: 800px;
+
     display: inline-block;
     height: 235px;
     position: relative;
@@ -117,8 +121,16 @@
     box-shadow: 0px 0px 5px black;
     height: 100%;
     width: 100%;
+
     -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
+    -moz-transition: 0.5s;
     -webkit-transition: all 0.5s;
+    -ms-transition:0.5s;
+    transition: 0.5s;
 }
 .card-flip-container.recovery .card-flip {
     -webkit-transform: rotateY(180deg);
@@ -127,7 +139,11 @@
     position: absolute;
     height: 100%;
     width: 100%;
+    
     -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility:hidden;
+    backface-visibility: hidden;
 }
 .card-flip .front {
     background-color: white;    
@@ -136,6 +152,10 @@
 }
 .card-flip .back {
     -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    
     background: #F0F0F0;
     font-family: Helvetica, Verdana, Arial;    
     padding: 0px 30px 25px 30px;
