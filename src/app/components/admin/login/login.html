@@ -1,55 +1,53 @@
-<div class="login container">
-    <div class="login-container">
-        <div class="login-logo"><i class="fa fa-meetup"></i> LOGO <small>Sistema</small></div>
-        <div class="login-header">
-            <i class="fa fa-{{ $ctrl.flip ? 'repeat' : 'sign-in' }}"></i> {{$ctrl.flip ? 'Recuperar contraseña' : 'Ingresar al sistema' }}
-        </div>
-        <div class="card-container">
-            <div class="card-flip-container" ng-class="{ 'recovery' : $ctrl.flip }">
-                <div class="card-flip">
-                    <div class="side front login-block">
-                        <form ng-submit="$ctrl.signin()">
-                            <div class="md-input-group">
-                                <span class="md-input-group-addon"><i class="fa fa-user"></i></span>
-                                <md-input label="Usuario" ng-model="$ctrl.username" required id="username"></md-input>
+<div class="login-container">
+    <div class="login-logo"><i class="fa fa-meetup"></i> LOGO <small>Sistema</small></div>
+    <div class="login-header">
+        <i class="fa fa-{{ $ctrl.flip ? 'repeat' : 'sign-in' }}"></i> {{$ctrl.flip ? 'Recuperar contraseña' : 'Ingresar al sistema' }}
+    </div>
+    <div class="card-container">
+        <div class="card-flip-container" ng-class="{ 'recovery' : $ctrl.flip }">
+            <div class="card-flip">
+                <div class="side front login-block" ng-class="{'side':$ctrl.flip}" ng-if="!$ctrl.flip">
+                    <form ng-submit="$ctrl.signin()">
+                        <div class="md-input-group">
+                            <span class="md-input-group-addon"><i class="fa fa-user"></i></span>
+                            <md-input label="Usuario" ng-model="$ctrl.username" required id="username"></md-input>
+                        </div>
+                        <div class="md-input-group">
+                            <span class="md-input-group-addon"><i class="fa fa-lock"></i></span>
+                            <md-input label="Contraseña" ng-model="$ctrl.password" type="password" required></md-input>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="p-5">
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Recordar sesión</span>
+                                </label><br>
+                                <a href="" ng-click="$ctrl.recovery()">¿Se te olvidó tu contraseña?</a>
                             </div>
-                            <div class="md-input-group">
-                                <span class="md-input-group-addon"><i class="fa fa-lock"></i></span>
-                                <md-input label="Contraseña" ng-model="$ctrl.password" type="password" required></md-input>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="p-5">
-                                    <label class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Recordar sesión</span>
-                                    </label><br>
-                                    <a href="" ng-click="$ctrl.recovery()">¿Se te olvidó tu contraseña?</a>
-                                </div>
-                                <div class="p-3 text-right">
-                                    <button md-effect class="btn btn-primary btn-lg" type="submit">
-                                        <i class="fa fa-sign-in"></i> Iniciar sesión
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="side back login-block">
-                        <form>
-                            <div class="md-input-group">
-                                <span class="md-input-group-addon"><i class="fa fa-user"></i></span>
-                                <md-input label="Correo electrónico"></md-input>
-                            </div>
-                            <div class="text-right">
-                                <button md-effect class="btn btn-primary btn-lg">
-                                    <i class="fa fa-repeat"></i> Recuperar contraseña
+                            <div class="p-3 text-right">
+                                <button md-effect class="btn btn-primary btn-lg" type="submit">
+                                    <i class="fa fa-sign-in"></i> Iniciar sesión
                                 </button>
                             </div>
-                        </form>
-                        <a href="" ng-click="$ctrl.goLogin()" class="login-link">Iniciar sesión</a>
-                    </div>  
+                        </div>
+                    </form>
                 </div>
+                <div class="side back login-block" ng-class="{'side':!$ctrl.flip}" ng-if="$ctrl.flip">
+                    <form>
+                        <div class="md-input-group">
+                            <span class="md-input-group-addon"><i class="fa fa-user"></i></span>
+                            <md-input label="Correo electrónico" ng-model="$ctrl.pass"></md-input>
+                        </div>
+                        <div class="text-right">
+                            <button md-effect class="btn btn-primary btn-lg">
+                                <i class="fa fa-repeat"></i> Recuperar contraseña
+                            </button>
+                        </div>
+                    </form>
+                    <a href="" ng-click="$ctrl.goLogin()" class="login-link">Iniciar sesión</a>
+                </div>  
             </div>
-        </div>        
-    </div>
+        </div>
+    </div>        
 </div>
