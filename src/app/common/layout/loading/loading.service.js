@@ -1,35 +1,27 @@
 'use strict';
 
 class LoadingService {
-    constructor() {
-        // code
+    constructor(cfpLoadingBar) {
+        'ngInject';
+
+        this.cfpLoadingBar = cfpLoadingBar;
     }
 
-    message(message, block, cancel) {
-        var $loading = angular.element(document.querySelector('#loading-progress'));
-        var $message = $loading.children('.loading-progress-message').find('span');
-        if (block) {
-            $loading.addClass('block');
-        }
-        if (cancel) {
-            $loading.addClass('cancel');
-        }
-        $message.html(message).parent().parent().show();
-        $loading.show();
-    }
+    show(message, locked) {
+        this.cfpLoadingBar.start();
+        document.querySelector('#loading-bar-spinner .loading-text').innerHTML = message || 'Cargando';
 
-    show() {
-        var $loading = angular.element('#loading-progress');
-        if ($loading.css('display') == 'none') {
-            $loading.show();
+        if (locked) {
+            document.querySelector('#loading-bar-spinner').classList.add('screen-locked');
+        } else {
+            document.querySelector('#loading-bar-spinner').classList.remove('screen-locked');
         }
     }
 
     hide() {
-        var $loading = angular.element('#loading-progress');
-        $loading.removeClass('block').removeClass('cancel');
-        $loading.children('.loading-progress-message').hide().children('span').html('');
-        $loading.hide();
+        this.cfpLoadingBar.complete();
+        document.querySelector('#loading-bar-spinner .loading-text').innerHTML = 'Cargando';
+        document.querySelector('#loading-bar-spinner').classList.remove('screen-locked');
     }
 }
 
