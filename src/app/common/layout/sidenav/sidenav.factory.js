@@ -10,35 +10,43 @@ const SidenavFactory = function () {
             cargo: '',
             email: '',
             photo: '',
-            nit: ''
+            nit: '',
+            user: ''
         },
         userColor: '',
         menu: [],
         rol: '',
         visible: true,
+        sidenav: true,
         getMenu: function () {
             return this.menu;
-        },
-        getUser: function () {
-            return this.user;
-        },
-        getRol: function () {
-            return this.rol;
-        },
-        getVisible: function () {
-            return this.visible;
         },
         setMenu: function (menu) {
             this.menu = menu;
         },
+        getUser: function () {
+            return this.user;
+        },
         setUser: function (user) {
             this.user = user;
+        },
+        getRol: function () {
+            return this.rol;
         },
         setRol: function (rol) {
             this.rol = rol;
         },
+        getVisible: function () {
+            return this.visible;
+        },
         setVisible: function (visible) {
             this.visible = visible;
+        },
+        getSidenav: function () {
+            return this.sidenav;
+        },
+        setSidenav: function (sidenav) {
+            this.sidenav = sidenav;
         }
     };
 

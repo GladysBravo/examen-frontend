@@ -2,6 +2,8 @@
 
 import Controller from './modal.controller';
 import Template from './modal.html';
+import PdfController from './pdf/pdfview.modal.controller';
+import PdfTemplate from './pdf/pdfview.modal.html';
 
 class ModalService {
     constructor($uibModal) {
@@ -33,31 +35,50 @@ class ModalService {
         setData(config, setting, 'cancel');
         setData(config, setting, 'eventCancel');
         setData(config, setting, 'eventOk');
+        setData(config, setting, 'btnClose');
 
         return this.$uibModal.open(setting);
     }    
 
-    alert(message, callbackOk, title) {
+    alert(message, callbackOk, title, icon, size) {
         this.show({
             title: title || 'Alerta',
-            icon: 'bell',
+            icon: icon || 'bell',
             message,
-            size: 'sm',
+            size: size || 'sm',
             cancel: false,
             eventOk: callbackOk,
-            keyboard: false
+            keyboard: false,
+            btnClose: false
         });
     }
 
-    confirm(message, callbackOk, callbackCancel, title, labelOk, labelCancel) {
-        this.show({
+    confirm(message, callbackOk, callbackCancel, title, labelOk, labelCancel, icon, size) {
+        let config = {
             title: title || 'Confirmar',
-            icon: 'warning',
+            icon: icon || 'warning',
             message,
             eventOk: callbackOk,
             eventCancel: callbackCancel,
             labelOk,
-            labelCancel
+            labelCancel,
+            btnClose: false
+        };
+        if (typeof size == 'string') {
+            config.size = size;
+        }
+        this.show(config);
+    }
+    
+    pdf(urlPdfFile, title) {
+        this.show({
+            template: PdfTemplate,
+            controller: PdfController,
+            data: {
+                urlPdf:urlPdfFile,
+                title:title
+            },
+            size: 'lg'
         });
     }
 }

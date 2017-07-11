@@ -9,17 +9,14 @@
             </button>
             <button type="button" class="btn btn-link" ng-click="$ctrl.fullscreen()">
                 <i class="fa fa-arrows-alt"></i>
-            </button>
-        
+            </button>        
             <button type="button" class="btn btn-link">
                 <i class="fa fa-bell-o"></i>
-            </button>
-            
+            </button>            
             <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-search"></i></div>
                 <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Escriba su búsqueda aquí">
-            </div>
-        
+            </div>        
         </div>
         <div class="navbar-nav navbar-buttons">
             <div class="nav-item dropdown" uib-dropdown is-open="status.isopen">
@@ -27,7 +24,7 @@
                     <i class="fa fa-ellipsis-v"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="margin-top: -40px;">
-                    <a class="dropdown-item" href=""><i class="fa fa-user"></i> Mi cuenta</a>
+                    <a class="dropdown-item" href="" ng-click="$ctrl.account()"><i class="fa fa-user"></i> Mi cuenta</a>
                     <a class="dropdown-item" href=""><i class="fa fa-cog"></i> Configuraciones</a>
                     <a class="dropdown-item" href="" ng-click="$ctrl.logout()"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
                 </div>

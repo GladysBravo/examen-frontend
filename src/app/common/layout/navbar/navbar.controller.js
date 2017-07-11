@@ -34,6 +34,10 @@ class NavbarController {
     logout() {
         this.Auth.logout();
     }
+
+    account() {
+        this.Sidenav.path("account");
+    }
 }
 
 export default NavbarController;

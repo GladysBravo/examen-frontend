@@ -34,8 +34,8 @@ const Interceptor = angular
                 
                 // Cerrando sesión si no se tiene permisos de acceso
                 if (rejection.status === 403) {
-                    let Login = $injector.get('Login');
-                    Login.logout();
+                    let Auth = $injector.get('Auth');
+                    Auth.logout();
                 }
                 return $q.reject(rejection);
             }

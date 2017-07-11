@@ -9,14 +9,14 @@ import AppComponent from './app.component';
 import Config from './app.config';
 
 const root = angular
-    .module('app', [
-        Config,
-        Common,
-        Components,
+.module('app', [
+    Config,
+    Common,
+    Components,
     ])
-    .component('app', AppComponent)
-    .constant()
-    .name;
+  .component('app', AppComponent)
+  .constant()
+  .name;
 
 // Bootstrap the app.
 document.addEventListener('DOMContentLoaded', () => angular.bootstrap(document, ['app']));

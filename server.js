@@ -1,13 +1,15 @@
-var express = require('express');
-var compression = require('compression');
-var serve = express();
-var app = express();
-var port = 3100;
-var appName = '/';
-var gzipStatic = require('connect-gzip-static');
-var fs = require('fs');
-var cors = require('cors');
-var dir = './dist';
+let express = require('express');
+let compression = require('compression');
+let serve = express();
+let app = express();
+let gzipStatic = require('connect-gzip-static');
+let fs = require('fs');
+let cors = require('cors');
+let dir = './dist';
+let config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+
+let port = config.port;
+let appName = config.subDomain;
 
 if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
@@ -20,8 +22,8 @@ app.use(gzipStatic(__dirname + '/dist'));
 
 // Begin Fake auth
 serve.use(cors());
-serve.post('/auth', function (req, res) {
-    var data = JSON.parse(fs.readFileSync('data-auth.example.json', 'utf8'));
+serve.post('/autenticar', (req, res) => {
+    let data = JSON.parse(fs.readFileSync('data-auth.example.json', 'utf8'));
     res.send(data);
 });
 

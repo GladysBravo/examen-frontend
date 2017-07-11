@@ -1,19 +1,23 @@
 /** Modules */
-var webpack           = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var ngAnnotatePlugin  = require('ng-annotate-webpack-plugin');
+let webpack           = require('webpack');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let CopyWebpackPlugin = require('copy-webpack-plugin');
+let ngAnnotatePlugin  = require('ng-annotate-webpack-plugin');
 let path              = require('path');
+let fs = require('fs');
+
+// let configWebpack = require('./config');
+let configWebpack = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
 /**
  * Env
  * Get npm lifecycle event to identify the environment
  */
-var ENV = process.env.npm_lifecycle_event;
-var isProd = ENV === 'build';
+let ENV = process.env.npm_lifecycle_event;
+let isProd = ENV === 'build';
 let rootPublic = path.resolve('./src');
-var sassLoader = !isProd ? ['style-loader?sourceMap', `css-loader?root=${rootPublic}&sourceMap`, 'postcss-loader?sourceMap', 'sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true'].join('!')
+let sassLoader = !isProd ? ['style-loader?sourceMap', `css-loader?root=${rootPublic}&sourceMap`, 'postcss-loader?sourceMap', 'sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true'].join('!')
   : ExtractTextPlugin.extract(['css-loader?sourceMap', 'postcss-loader?sourceMap', 'sass-loader?sourceMap']);
 
 module.exports = (function makeWebpackConfig () {
@@ -21,14 +25,14 @@ module.exports = (function makeWebpackConfig () {
    * Port
    * This is default port for dev server
    */
-  var port = 8080;
+  let port = configWebpack.portDev;
 
   /**
    * Config
    * Reference: http://webpack.github.io/docs/configuration.html
    * This is the object where all configuration gets set
    */
-  var config = {};
+  let config = {};
 
   /**
    * Entry
@@ -53,7 +57,7 @@ module.exports = (function makeWebpackConfig () {
      * Output path from the view of the page
      * Uses webpack-dev-server in development
      */
-    publicPath: isProd ? '/' : 'http://localhost:' + port + '/',
+    publicPath: isProd ? configWebpack.subDomain : 'http://localhost:' + port + '/',
 
     /**
      * Filename for entry points
@@ -102,6 +106,7 @@ module.exports = (function makeWebpackConfig () {
       loaders: ['ng-annotate', 'babel?presets[]=es2015&presets[]=stage-2'],
       exclude: /node_modules/
     },
+    { test: /\.json$/, loader: 'json' },
     { /** This loader config depend on line 178 */
       /**
        * CSS LOADER

@@ -15,6 +15,8 @@ import Tooltip from './angular-ui-bootstrap/src/tooltip';
 
 import Waves from './waves/waves.module';
 import Formly from './formly/formly.module';
+import NgTags from './angular-chips';
+import DirectiveNumeric from './angular-numeric-directive';
 
 import './vendor.css';
 
@@ -32,7 +34,9 @@ const Vendor = angular
         Timepicker,
         Tooltip,
         Waves,
-        Formly
+        Formly,
+        NgTags,
+        DirectiveNumeric
     ])
     .name;
 

@@ -6,7 +6,7 @@ class MdEventLabel {
     }
 
     link($scope, $elem) {
-        if ($scope.$ctrl.required === undefined && $scope.$ctrl.ngRequired === undefined) {
+        if ($scope.$ctrl.required === undefined || $scope.$ctrl.ngRequired === undefined) {
             let $input = $elem.find('input');
             if ($input.length === 0) {
                 $input = $elem.find('textarea');
@@ -24,9 +24,11 @@ class MdEventLabel {
                     $input.on('focus', () => {
                         $input.parent().addClass('not-required-select').parent().addClass('md-focus');
                     }).on('blur', () => {
-                        setTimeout(() => {                            
+                      if (!$input.parent().hasClass('open')) {
+                        setTimeout(() => {
                             $input.parent()[$input.parent()[0].querySelector('.ui-select-match-text').innerHTML.length ? 'addClass' : 'removeClass']('not-required-select').parent().removeClass('md-focus');
                         }, 1);
+                      }
                     });
                 }, 1000);
             }

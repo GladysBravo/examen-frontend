@@ -1,10 +1,10 @@
 'use-strict';
 
 class CrudTableService {
-    constructor($injector) {
+    constructor(Datetime) {
         'ngInject';
 
-        this.$injector = $injector;
+        this.Datetime = Datetime;
     }
 
     filterFields(data, fields) {
@@ -53,11 +53,11 @@ class CrudTableService {
     }    
 
     parseSave(data, formly) {
-        var Datetime = this.$injector.get('Datetime');                
+           
         var item = {};
         for (var i in data) {
             if (this.toType(data[i]) == 'date') {
-                item[i] = Datetime.format(data[i], 'YYYY-MM-dd');
+                item[i] = this.Datetime.format(data[i], 'YYYY-MM-dd');
             } else {
                 if (typeof data[i] == 'string' && (data[i] == 'true' || data[i] == 'false')) {
                     item[i] = item[i] == 'true'; 
@@ -97,10 +97,9 @@ class CrudTableService {
     }
 
     filterItem(data) {
-        var Datetime = this.$injector.get('Datetime');
         for (var i in data) {
             if (typeof data[i] == 'string') {
-                if (Datetime.isDate(new Date(data[i]))) {
+                if (this.Datetime.isDate(new Date(data[i]))) {
                     data[i] = new Date(data[i]);
                 } else if (!/[a-zA-Z]+/g.test(data[i]) && /^-?[0-9.]+\:?[0-9]+\:?[0-9]*$/g.test(data[i]) && data[i].length == 8) {
                     // data[i] = formatTime(data[i]);
@@ -119,10 +118,22 @@ class CrudTableService {
         return 0;
     }
 
-    // formatTime(time) {
-    //     time = time.split(':');
-    //     return [time[0], time[1]].join(':');
-    // } 
+    cleanData(item) {
+        for (let key in item) {
+            if (item[key + '_fk']) {
+                item[key] = item[key + '_fk'];
+                delete item[key + '_fk'];
+            }
+            if (item[key] == 'boolean_true') {
+                item[key] = true;
+            } else if (item[key] == 'boolean_false') {
+                item[key] = false;
+            } else {
+                item[key] = this.Datetime.toDate(item[key]);
+            }
+        }
+        return item;
+    }
 }
 
 export default CrudTableService;

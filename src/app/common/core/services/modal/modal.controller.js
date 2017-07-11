@@ -2,7 +2,9 @@
 
 class ModalController {
 
-    constructor($uibModalInstance, data, title, icon, message, labelOk, labelCancel, cancel, eventCancel, eventOk) {
+    constructor($uibModalInstance, data, title, icon, message, labelOk, labelCancel, cancel, eventCancel, eventOk, btnClose) {
+        'ngInject';
+        
         this.data = data;
         this.title = title;
         this.icon = icon;
@@ -13,6 +15,7 @@ class ModalController {
         this.labelCancel = labelCancel;
         this.cancel = typeof cancel == 'undefined' ? true : cancel === '' ? true : cancel;
         this.$uibModalInstance = $uibModalInstance;
+        this.btnClose = typeof btnClose == 'undefined' ? true : btnClose;
     }
 
     ok() {

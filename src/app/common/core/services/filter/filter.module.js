@@ -9,7 +9,7 @@ function paste(obj, e) {
     e.preventDefault();
 
     let pastedData;
-    if (window.clipboardData && window.clipboardData.getData) { // IE
+    if (window.clipboardData && window.clipboardData.getData) { // IE       
         pastedData = window.clipboardData.getData('Text');
     } else if (e.clipboardData && e.clipboardData.getData) {
         pastedData = e.clipboardData.getData('text/plain');
@@ -19,9 +19,11 @@ function paste(obj, e) {
         pastedData = pastedData.trim();
     }
 
-    let maxLength = parseInt(obj.maxLength);
-    if (maxLength && typeof maxLength == 'number') {
-        pastedData = pastedData.substring(0, maxLength);
+    if (obj.maxLength !== undefined) {        
+        let maxLength = parseInt(obj.maxLength);
+        if (maxLength && maxLength > 0 && typeof maxLength == 'number') {
+            pastedData = pastedData.substring(0, maxLength);
+        }
     }
 
     return pastedData;
@@ -29,7 +31,18 @@ function paste(obj, e) {
 
 function setTextPaste(scope, ngModel, text) {
     ngModel = ngModel.replace('$ctrl.', '');
-    scope.$ctrl[ngModel] = text;
+    let model = ngModel.split('.');
+    if (model.length > 1) {
+        if (model.length == 2) {
+            scope.$ctrl[model[0]][model[1]] = text;
+        } else if (model.length == 3) {
+            scope.$ctrl[model[0]][model[1]][model[2]] = text;
+        } else if (model.length == 4) {
+            scope.$ctrl[model[0]][model[1]][model[2]][model[3]] = text;
+        }
+    } else {
+        scope.$ctrl[ngModel] = text;
+    }
 }
 
 const Filter = angular
@@ -40,13 +53,19 @@ const Filter = angular
             element.bind("keydown", e => {
                 Filter.integer(e);
             }).bind('paste', e => {
-                let text = paste(element[0], e);
-                setTimeout(() => {
+                if (attr.trimPaste !== undefined) {
+                    let text = paste(element[0], e);
                     scope.$apply(function() {
                         text = Filter.isInteger(text) ? text : '';
                         setTextPaste(scope, attr.ngModel, text);
                     });
-                }, 1);
+                } else {
+                    setTimeout(() => {
+                        if (!Filter.isInteger(element[0].value)) {
+                            element[0].value = '';
+                        }
+                    }, 1);
+                }
             });
         };
     })
@@ -55,13 +74,19 @@ const Filter = angular
             element.bind("keydown", e => {
                 Filter.decimal(e);
             }).bind('paste', e => {
-                let text = paste(element[0], e);
-                setTimeout(() => {
+                if (attr.trimPaste !== undefined) {
+                    let text = paste(element[0], e);
                     scope.$apply(function() {
                         text = Filter.isDecimal(text) ? text : '';
                         setTextPaste(scope, attr.ngModel, text);
                     });
-                }, 1);
+                } else {
+                    setTimeout(() => {
+                        if (!Filter.isDecimal(element[0].value)) {
+                            element[0].value = '';
+                        }
+                    }, 1);
+                }
             });
         };
     })
@@ -70,13 +95,40 @@ const Filter = angular
             element.bind("keydown", e => {
                 Filter.decimalPositive(e);
             }).bind('paste', e => {
-                let text = paste(element[0], e);
-                setTimeout(() => {
+                if (attr.trimPaste !== undefined) {
+                    let text = paste(element[0], e);
                     scope.$apply(function() {
                         text = Filter.isDecimalPositive(text) ? text : '';
                         setTextPaste(scope, attr.ngModel, text);
                     });
-                }, 1);
+                } else {
+                    setTimeout(() => {
+                        if (!Filter.isDecimalPositive(element[0].value)) {
+                            element[0].value = '';
+                        }
+                    }, 1);
+                }
+            });
+        };
+    })
+    .directive('decimalFormat', Filter => {
+        return (scope, element, attr) => {
+            element.bind("keydown", e => {
+                Filter.decimalFormat(e);
+            }).bind('paste', e => {
+                if (attr.trimPaste !== undefined) {
+                    let text = paste(element[0], e);
+                    scope.$apply(function() {
+                        text = Filter.isDecimalFormat(text) ? text : '';
+                        setTextPaste(scope, attr.ngModel, text);
+                    });
+                } else {
+                    setTimeout(() => {
+                        if (!Filter.isDecimalFormat(element[0].value)) {
+                            element[0].value = '';
+                        }
+                    }, 1);
+                }
             });
         };
     })
@@ -85,13 +137,19 @@ const Filter = angular
             element.bind("keydown", e => {
                 Filter.numeric(e);
             }).bind('paste', e => {
-                let text = paste(element[0], e);
-                setTimeout(() => {
+                if (attr.trimPaste !== undefined) {
+                    let text = paste(element[0], e);
                     scope.$apply(function() {
                         text = Filter.isNumeric(text) ? text : '';
                         setTextPaste(scope, attr.ngModel, text);
                     });
-                }, 1);
+                } else {
+                    setTimeout(() => {
+                        if (!Filter.isNumeric(element[0].value)) {
+                            element[0].value = '';
+                        }
+                    }, 1);
+                }
             });
         };
     })
@@ -100,13 +158,19 @@ const Filter = angular
             element.bind("keydown", e => {
                 Filter.alpha(e);
             }).bind('paste', e => {
-                let text = paste(element[0], e);
-                setTimeout(() => {
+                if (attr.trimPaste !== undefined) {
+                    let text = paste(element[0], e);
                     scope.$apply(function() {
                         text = Filter.isAlpha(text) ? text : '';
                         setTextPaste(scope, attr.ngModel, text);
                     });
-                }, 1);
+                } else {
+                    setTimeout(() => {
+                        if (!Filter.isAlpha(element[0].value)) {
+                            element[0].value = '';
+                        }
+                    }, 1);
+                }
             });
         };
     })
@@ -115,28 +179,82 @@ const Filter = angular
             element.bind("keydown", e => {
                 Filter.alphaNumeric(e);
             }).bind('paste', e => {
-                let text = paste(element[0], e);
-                setTimeout(() => {
+                if (attr.trimPaste !== undefined) {
+                    let text = paste(element[0], e);
                     scope.$apply(function() {
                         text = Filter.isAlphaNumeric(text) ? text : '';
                         setTextPaste(scope, attr.ngModel, text);
                     });
-                }, 1);
+                } else {
+                    setTimeout(() => {
+                        if (!Filter.isAlphaNumeric(element[0].value)) {
+                            element[0].value = '';
+                        }
+                    }, 1);
+                }
             });
         };
     })
-    .directive('alphaDash', Filter => {
+    .directive('alphaDash', Filter => {  
         return (scope, element, attr) => {
             element.bind("keydown", e => {
                 Filter.alphaDash(e);
             }).bind('paste', e => {
-                let text = paste(element[0], e);
-                setTimeout(() => {
+                if (attr.trimPaste !== undefined) {
+                    let text = paste(element[0], e);
                     scope.$apply(function() {
                         text = Filter.isAlphaDash(text) ? text : '';
                         setTextPaste(scope, attr.ngModel, text);
                     });
-                }, 1);
+                } else {
+                    setTimeout(() => {
+                        if (!Filter.isAlphaDash(element[0].value)) {
+                            element[0].value = '';
+                        }
+                    }, 1);
+                }
+            });
+        };
+    })
+    .directive('passport', Filter => {
+        return (scope, element, attr) => {
+            element.bind("keydown", e => {
+                Filter.passport(e);
+            }).bind('paste', e => {
+                if (attr.trimPaste !== undefined) {
+                    let text = paste(element[0], e);
+                    scope.$apply(function() {
+                        text = Filter.isPassport(text) ? text : '';
+                        setTextPaste(scope, attr.ngModel, text);
+                    });
+                } else {
+                    setTimeout(() => {
+                        if (!Filter.isPassport(element[0].value)) {
+                            element[0].value = '';
+                        }
+                    }, 1);
+                }
+            });
+        };
+    })
+    .directive('phone', Filter => {
+        return (scope, element, attr) => {
+            element.bind("keydown", e => {
+                Filter.phone(e);
+            }).bind('paste', e => {
+                if (attr.trimPaste !== undefined) {
+                    let text = paste(element[0], e);
+                    scope.$apply(function() {
+                        text = Filter.isPhone(text) ? text : '';
+                        setTextPaste(scope, attr.ngModel, text);
+                    });
+                } else {
+                    setTimeout(() => {
+                        if (!Filter.isPhone(element[0].value)) {
+                            element[0].value = '';
+                        }
+                    }, 1);
+                }
             });
         };
     })
@@ -171,7 +289,7 @@ const Filter = angular
                 setTimeout(() => {
                     if (!Filter.isNit(element[0].value)) {
                         element[0].value = '';
-                    }                    
+                    }
                 }, 1);
             });
         };
@@ -183,7 +301,7 @@ const Filter = angular
                 scope.$watch('trigger', value => {
                     if(value === "true") {
                         $timeout(() => {
-                            element[0].focus(); 
+                            element[0].focus();
                         });
                     }
                 });
@@ -200,7 +318,7 @@ const Filter = angular
             }
             function focus(condition) {
                 if (condition) {
-                    $timeout(function() {                    
+                    $timeout(function() {
                         dom.focus();
                     }, $scope.$eval($attrs.focusDelay) || 0);
                 }

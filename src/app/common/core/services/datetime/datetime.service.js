@@ -46,6 +46,38 @@ class DatetimeService {
         return new Date(year, month, data);
     }
 
+    toString(date) {
+        if (this.Util.toType(date) == 'string') {                        
+            let pos = date.indexOf('T');
+            if (pos != -1 && pos <= 10 && pos >= 8) {
+                let fecha = date.substring(0, pos);
+                if (!/[a-zA-Z]+/g.test(fecha) && /^-?[0-9.]+\-?[0-9]+\-?[0-9]*$/g.test(fecha)) {
+                    fecha = fecha.split('-');
+                    return this.format(new Date(fecha[0], parseInt(fecha[1]) - 1, fecha[2]));
+                }
+            }
+        } else {
+            if (this.Util.toType(date) == 'date') {
+                return this.format(new Date(date));
+            }
+        }
+        return date;
+    }
+
+    toDate(string) {
+        if (this.Util.toType(string) == 'string') {                        
+            let pos = string.indexOf('T');
+            if (pos != -1 && pos <= 10 && pos >= 8) {
+                let fecha = string.substring(0, pos);
+                if (!/[a-zA-Z]+/g.test(fecha) && /^-?[0-9.]+\-?[0-9]+\-?[0-9]*$/g.test(fecha)) {
+                    fecha = fecha.split('-');
+                    return new Date(fecha[0], parseInt(fecha[1]) - 1, fecha[2]);
+                }
+            }
+        }
+        return string;
+    }
+
     isDate (date) {
         if (this.Util.toType(date) == 'string') {
             date = this.convert(date);
@@ -322,4 +354,3 @@ class DatetimeService {
 }
 
 export default DatetimeService;
-

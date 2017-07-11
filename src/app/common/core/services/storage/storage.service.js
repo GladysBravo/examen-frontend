@@ -4,7 +4,7 @@ class StorageService {
 
     constructor($window, appName) {
         'ngInject';
-        
+
         this.appName = appName || 'app';
         this.$local = $window.localStorage;
         this.$session = $window.sessionStorage;
@@ -12,15 +12,15 @@ class StorageService {
     }
 
     setUser(user) {
-        this.setSession('user', user);
+        this.set('user', user);
     }
 
     getUser() {
-        return this.getSession('user');
+        return this.get('user');
     }
 
     existUser() {
-        return this.existSession('user');
+        return this.exist('user');
     }
 
     removeUser() {
@@ -33,7 +33,12 @@ class StorageService {
     }
 
     get(key) {
-        return this.$JSON.parse(this.$local.getItem(this.appName + '_' + key));
+        let data = this.$local.getItem(this.appName + '_' + key);
+        try {
+            return this.$JSON.parse(data);
+        } catch (Exception) {
+            return data;
+        }
     }
 
     remove(key) {

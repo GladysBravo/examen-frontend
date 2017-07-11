@@ -2,7 +2,7 @@
 
 class SidenavController {
 
-    constructor($location, Storage, Util, BreadcrumbFactory, SidenavFactory, systemName) {
+    constructor($location, Storage, Util, BreadcrumbFactory, SidenavFactory, Auth, systemName) {
         "ngInject";
 
         this.$location = $location;
@@ -10,6 +10,7 @@ class SidenavController {
         this.Util = Util;
         this.BreadcrumbFactory = BreadcrumbFactory;
         this.SidenavFactory = SidenavFactory;
+        this.Auth = Auth;
         this.systemName = systemName;
     }
 
@@ -22,6 +23,7 @@ class SidenavController {
             this.SidenavFactory.setUser(this.Storage.getUser());
             this.SidenavFactory.setMenu(this.Storage.get('menu'));
             this.SidenavFactory.setVisible(this.Storage.get('visible'));
+            this.SidenavFactory.setSidenav(this.Storage.get('sidenav'));
         }
         this.menu = this.SidenavFactory.getMenu();
         this.Storage.set('menu', this.menu);
@@ -43,6 +45,14 @@ class SidenavController {
                 this.BreadcrumbFactory.setParent(page[0]);
                 this.BreadcrumbFactory.setCurrent(page[1]);
             }
+            let el = document.querySelector('#sidenav-menu .sidenav-submenu-item.active');
+            if (el) {
+                el.classList.remove('active');
+            }
+            el = document.querySelector(`#sidenav-menu .sidenav-submenu-item[data-url=${url}]`);
+            if (el) {
+                el.classList.add('active');
+            }
             this.$location.path(url);
         }
     }
@@ -52,8 +62,15 @@ class SidenavController {
     }
 
     getName() {
-        var user = this.SidenavFactory.getUser();
-        return user.username;
+        let user = this.SidenavFactory.getUser();
+        if (user) {
+            user = user.usuario || user.username;
+            if (user && user.split('@').length > 1) {
+                user = user.split('@')[0];
+            }            
+            return user;
+        }
+        return "";
     }
 
     getEmail() {
@@ -78,6 +95,20 @@ class SidenavController {
 
     getVisible() {
         return this.SidenavFactory.getVisible();
+    }
+
+    getSidenav() {
+        return this.SidenavFactory.getSidenav();
+    }
+
+    setVisible(visible) {
+        this.Storage.set('visible', visible);
+        this.SidenavFactory.setVisible(visible);
+    }
+
+    setSidenav(sidenav) {
+        this.Storage.set('sidenav', sidenav);
+        this.SidenavFactory.setSidenav(sidenav);
     }
 }
 

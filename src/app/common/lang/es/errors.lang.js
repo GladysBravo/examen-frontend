@@ -2,6 +2,7 @@
 
 const Errors = {
     '401': 'No se pudo realizar la operación.',
+    '412': 'No se pudo realizar la operación.',
     '403': 'Su sesión ha caducado o no tiene los permisos necesarios.',
     '404': 'No existe el recurso solicitado.',
     '407': 'Necesita configurar su Proxy para poder usar el sistema.',

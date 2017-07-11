@@ -1,3 +1,9 @@
 node_modules
 dist
-npm-debug.log
+config.json
+
+npm-debug.log*
+
+nbproject
+.vscode
+.sublime*

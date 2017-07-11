@@ -1,13 +1,20 @@
 'use strict';
 
+import config from '../../config.json';
+
+const server = config.server;
+
 const Config = angular
-    .module('app.config', [])
-    .constant('appName', 'base') // prefijo del sistema para el Storage y Sessiones
-    .constant('systemName', 'Proyecto Base')
-    .constant('timeSessionExpired', 30) //Tiempo en minutos para que la sesión se cierre automáticamente si existe inactividad
-    .constant('PageNoLogin', ['login']) // Rutas que no requieren autenticación
-    .constant('authUrl', 'http://localhost:4000/autenticar/') // URL para autenticacion
-    .constant('restUrl', 'http://localhost:4000/api/v1/') // Rest principal del sistema
-    .name;
+  .module('app.config', [])
+  .constant('appName', 'app') // prefijo del sistema para el Storage y Sessiones
+  .constant('systemName', 'Proyecto base')
+  .constant('timeSessionExpired', config.timeSessionExpired) //Tiempo en minutos para que la sesión se cierre automáticamente si existe i$
+  .constant('onbeforeunload', config.onbeforeunload)
+  .constant('debug', config.debug)
+  .constant('PageNoLogin', ['login']) // Rutas que no requieren autenticación
+  .constant('authUrl', `${config.serverAuth}/autenticar/`) // URL para autenticacion
+  .constant('apiUrl', `${server}/api/v1/`) // Rest principal del sistema
+  .constant('baseUrl', `${server}/`) // Ruta base
+  .name;
 
 export default Config;

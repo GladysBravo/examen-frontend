@@ -2,8 +2,8 @@
 
 const Formly = angular
     .module('vendor.formly', [])
-    .run(function(formlyConfig) {
-
+    .run(function(formlyConfig, formlyValidationMessages) {
+        'ngInject';
         /* Datepicker */
 
         var attributes = [
@@ -127,6 +127,10 @@ const Formly = angular
                 return chr ? chr.toLowerCase() : '';
             });
         }
+
+        formlyConfig.extras.errorExistsAndShouldBeVisibleExpression = 'fc.$touched || form.$submitted';
+
+        formlyValidationMessages.addStringMessage('required', 'El campo es obligatorio');
     })
     .name;
 

@@ -1,0 +1,79 @@
+<div class="documento-indentidad">
+  <ng-form name="doc_identidad_form">
+    <div class="row mx-0">
+      <div class="form-group" ng-if="!$ctrl.onlyCi">
+        <label class="ap-req">Tipo de documento</label>
+        <select class="form-control" ng-model="$ctrl.ngModel.tipo_documento" size required ng-disabled="$ctrl.ngDisabled || ($ctrl.ngModel.tipo_documento == 'CARNET_IDENTIDAD' && $ctrl.fill)" ng-change="$ctrl.changeType()">
+          <option value="CARNET_IDENTIDAD">Cédula de identidad</option>
+          <option value="PASAPORTE">Pasaporte</option>
+        </select>
+      </div>
+      <div class="col mt-a mb-0">
+        <div class="alert alert-info" ng-if="$ctrl.ngModel.tipo_documento == 'CARNET_IDENTIDAD' && !$ctrl.ngDisabled">
+          <i class="fa fa-info-circle"></i>
+          <span>Ingrese número de documento y fecha de nacimiento para su búsqueda.</span>
+          <!-- <help message="$root.helpMessage.documento_identidad" position="bottom"></help> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group" ng-if="$ctrl.ngModel.tipo_documento == 'CARNET_IDENTIDAD'" class="help-input">
+          <label class="ap-req">Número de documento:</label>
+          <input name="documento_identidad" alpha-dash uppercase maxlength="25" class="form-control" ng-model="$ctrl.ngModel.documento_identidad" required maxlength="20" ng-disabled="$ctrl.ngDisabled || $ctrl.isFill()">
+          <!-- <help message="$root.helpMessage.documento_identidad" position="bottom"></help> -->
+          <div ap-error ng-messages="doc_identidad_form.documento_identidad.$error" role="alert" ng-if="doc_identidad_form.documento_identidad.$touched">
+            <div ng-message="required">El campo es requerido</div>
+          </div>
+        </div>
+        <div class="form-group" ng-if="$ctrl.ngModel.tipo_documento == 'PASAPORTE'">
+          <label class="ap-req">Número de documento:</label>
+          <input name="documento_identidad" passport uppercase maxlength="25" class="form-control" ng-model="$ctrl.ngModel.documento_identidad" required maxlength="15" ng-disabled="$ctrl.ngDisabled">
+          <!-- <help message="$root.helpMessage.documento_identidad" position="bottom"></help> -->
+          <div ap-error ng-messages="doc_identidad_form.documento_identidad.$error" role="alert" ng-if="doc_identidad_form.documento_identidad.$touched">
+            <div ng-message="required">El campo es requerido</div>
+          </div>
+        </div>
+        <!-- <div class="mt-a mb-3">
+          <span class="fa fa-question btn-c-info"></span>
+        </div> -->
+      </div>
+
+      <select-date class="col-md-5" ng-model="$ctrl.ngModel.fecha_nacimiento" label="Fecha de nacimiento:" ng-disabled="$ctrl.ngDisabled || ($ctrl.isFill() && $ctrl.isCI())" ng-required="'true'"></select-date>
+
+      <div class="col-md-3 mt-a mb-3">
+        <button type="button" class="btn btn-warning" ng-click="$ctrl.search()" ng-disabled="$ctrl.isDisabled()" ng-if="$ctrl.isCI() && !$ctrl.isFill()">
+          <i class="fa fa-search"></i>Buscar
+        </button>
+        <button type="button" class="btn" ng-click="$ctrl.nombreDel()" ng-if="$ctrl.isCI() && $ctrl.isFill()">
+          <i class="fa fa-rowswap"></i>Cambiar
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 form-group">
+        <label>Primer apellido:</label>
+        <input name="primer_apellido" alpha uppercase maxlength="100" class="form-control" ng-model="$ctrl.ngModel.primer_apellido" ng-disabled="$ctrl.isCI()">
+        <div ap-error ng-messages="doc_identidad_form.primer_apellido.$error" role="alert" ng-if="doc_identidad_form.primer_apellido.$touched">
+          <div ng-message="required">El campo es requerido</div>
+        </div>
+      </div>
+      <div class="col-md-4 form-group">
+        <label>Segundo apellido:</label>
+        <input name="segundo_apellido" alpha uppercase maxlength="100" class="form-control" ng-model="$ctrl.ngModel.segundo_apellido" ng-disabled="$ctrl.isCI()">
+        <div ap-error ng-messages="doc_identidad_form.segundo_apellido.$error" role="alert" ng-if="doc_identidad_form.segundo_apellido.$touched">
+          <div ng-message="required">El campo es requerido</div>
+        </div>
+      </div>
+      <div class="col-md-4 form-group">
+        <label class="ap-req">Nombre(s):</label>
+        <input name="nombres" alpha uppercase maxlength="100" class="form-control" ng-model="$ctrl.ngModel.nombres" ng-disabled="$ctrl.isCI()" required>
+        <div ap-error ng-messages="doc_identidad_form.nombres.$error" role="alert" ng-if="doc_identidad_form.nombres.$touched">
+          <div ng-message="required">El campo es requerido</div>
+        </div>
+      </div>
+  </div>
+  </ng-form>
+</div>

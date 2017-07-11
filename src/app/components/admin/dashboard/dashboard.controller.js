@@ -4,13 +4,13 @@ import modalController from './dashboard.modal.controller.js';
 import modalTemplate from './dashboard.modal.html';
 
 class DashboardController {
-    constructor(restUrl, Message, Modal, $log) {
+    constructor(apiUrl, Message, Modal, $log) {
         'ngInject';
         
         this.dt = new Date();
         this.Message = Message;
         this.Modal = Modal;
-        this.restUrl = restUrl;
+        this.apiUrl = apiUrl;
         this.$log = $log;
     }
 

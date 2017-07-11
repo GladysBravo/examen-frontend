@@ -48,7 +48,7 @@
     height: 336px;
 
     .login-block {
-        border-top: 5px solid $colorPrimary;
+        border-top: 5px solid lighten($colorPrimary, 15%);
 
         a {
             font-size: .85rem;

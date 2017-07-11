@@ -18,7 +18,7 @@ class ToggleMenu {
                     $elem.parent().removeClass('sidenav-open');
                     $elem.removeClass('active');
                 } else {
-                    angular.forEach(document.querySelectorAll('#sidenav-menu .sidenav-open'), (el)=>{
+                    angular.forEach(document.querySelectorAll('#sidenav-menu .sidenav-open'), (el) => {
                         el.querySelector('ul').style.height = 0;
                         el.classList.remove('sidenav-open');
                         el.querySelector('.active').classList.remove('active');
