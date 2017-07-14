@@ -288,7 +288,7 @@
           <input type="text" class="form-control" uib-datepicker-popup ng-model="$ctrl.dt" is-open="$ctrl.opened" datepicker-options="$ctrl.dateOptions"
             ng-required="true" />
           <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="$ctrl.open()"><i class="fa fa-calendar"></i></button>
+            <button type="button" class="btn btn-default" ng-click="$ctrl.opened = true"><i class="fa fa-calendar"></i></button>
           </span>
         </div>
       </div>
@@ -297,8 +297,46 @@
       <h3>Timepicker</h3>
       <div uib-timepicker ng-model="$ctrl.mytime"></div>
       <hr>
-      <h3>Otros</h3>
-      <p>Ejemplos...</p>
+
+      <h3>Loading bar</h3>
+      <div>
+        <p><strong class="text-danger">Nota.-</strong> Por defecto para cada petición se muestra el loading bar automáticamente, pero si se quiere un control manual usar estas opciones:</p> 
+        <button class="btn btn-primary" type="button" ng-click="$ctrl.loadingInit()">Iniciar loading</button>
+        <button class="btn btn-primary" type="button" ng-click="$ctrl.loadingInitText()">Iniciar loading con texto</button>
+        <button class="btn btn-primary" type="button" ng-click="$ctrl.loadingInitLocked()">Iniciar loading con texto en pantalla completa</button>
+        <button class="btn btn-danger" type="button" ng-click="$ctrl.loadingEnd()">Terminar loading</button>
+      </div>
+      <hr>
+
+      <h3>Ayudas</h3>
+      <div>
+        <p>Debe pasar el puntero del mouse sobre el ícono <ui-help message="$ctrl.helpLang.ejemplo"></ui-help></p>
+        <p>Texto de ayuda (top) <ui-help message="$ctrl.helpLang.ejemplo" direction="top"></ui-help></p>
+        <p>Texto de ayuda (right) <ui-help message="$ctrl.helpLang.ejemplo" direction="right"></ui-help></p>
+        <p>Texto de ayuda (bottom) <ui-help message="$ctrl.helpLang.ejemplo" direction="bottom"></ui-help></p>
+        <p>Texto de ayuda (left) <ui-help message="$ctrl.helpLang.ejemplo" direction="left"></ui-help></p>        
+      </div>
+      <hr>
+
+      <h3>File upload</h3>
+      <div class="row">
+        <div class="col">
+          <label> File upload</label>
+          <ui-file-upload url="$ctrl.upload.url"
+                          name="file"></ui-file-upload>
+        </div>
+        <div class="col">
+          <label> File upload (multiple)</label>
+          <ui-file-upload url="$ctrl.upload.url"
+                          label="Subir al servidor"
+                          textUpload="Subir archivos, arrastre acá"
+                          multiple="true"
+                          types="|png|jpg|pdf|xls|csv|"
+                          name="file"></ui-file-upload>
+        </div>
+      </div>
+      <hr>
+  
       <h3>C-components</h3>
       <hr>
       <h3>Formulario</h3>

@@ -50,7 +50,8 @@ const Common = angular
     uiSelect,
     Lang,
     Core,
-    Layout 
+    Layout,
+    'cfp.loadingBar'
   ])
   .config(Config)
   .run(Run)    

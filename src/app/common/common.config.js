@@ -1,6 +1,6 @@
 'use strict';
 
-const CommonConfig = function ($httpProvider, $logProvider, $authProvider, authUrl, appName, DataServiceConfig, uibDatepickerPopupConfig, uibDatepickerConfig, formlyConfigProvider, debug, $compileProvider) {
+const CommonConfig = function ($httpProvider, $logProvider, $authProvider, authUrl, appName, DataServiceConfig, uibDatepickerPopupConfig, uibDatepickerConfig, formlyConfigProvider, debug, $compileProvider, cfpLoadingBarProvider) {
   'ngInject';
 
   // Habilitar los logs del sistema
@@ -51,6 +51,9 @@ const CommonConfig = function ($httpProvider, $logProvider, $authProvider, authU
       </div>
     `
   });
+
+  // Config loading
+  cfpLoadingBarProvider.spinnerTemplate = '<div id="loading-bar-spinner"><div class="loading-container"><span class="loading-text"></span> <span class="spinner-icon"></span></div></div>';
 };
 
 export default CommonConfig;

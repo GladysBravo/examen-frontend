@@ -9,13 +9,15 @@ class DashboardModalController {
     }
 
     $onInit() {
+        // this.selected es un dato de ejemplo
         this.selected = {
             item: this.items[0]
         };
     }
 
     ok() {
-        this.$uibModalInstance.close(this.selected.item);
+        // si se quiere enviar información al contenedor padre que llamó el modal se lo hace de esta manera:
+        this.$uibModalInstance.close(this.selected.item); // this.selected.item se envía al contenedor padre que lo invocó
     }
 
     cancel() {
