@@ -16,6 +16,7 @@ import uiRouter from '@uirouter/angularjs';
 import satellizer from 'satellizer';
 import loadingBar from 'angular-loading-bar';
 import ngSanitize from 'angular-sanitize';
+import ngMessages from 'angular-messages';
 import ngResource from 'angular-resource';
 import uiSelect from 'ui-select';
 import toastr from 'angular-toastr';
@@ -38,6 +39,7 @@ const Common = angular
   .module('app.common', [
     loadingBar,
     ngSanitize,
+    ngMessages,
     ngResource,
     satellizer,
     'angularFileUpload',

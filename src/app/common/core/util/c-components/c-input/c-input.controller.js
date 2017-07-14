@@ -2,14 +2,11 @@
 
 class CInputController {
     constructor() {
-      this.mayuscula='mdmayuscula';
     }
 
     $onInit() {
-        this.regexp = null;
         this.validation = '';
         let tipoValidacion = this.ngValidation;
-
 
         switch (tipoValidacion) {
           case 'correo':
@@ -22,7 +19,6 @@ class CInputController {
             this.messageErrorPattern = 'Introduzca un número de celular válido';
             break;
           case 'telefono':
-            //this.validation = /^([679]{1}[0-9]{7}|[2-9]{1}[0-9]{6}|(8001|9001)[0-9]{5})((,\s)([679]{1}[0-9]{7}|[2-9]{1}[0-9]{6}|(8001|9001)[0-9]{5}))*$/;
             this.validation = /^(\+((\d{3}|\d{2}))( |-)\d{5,15}|(\d{7})|(\d{8}))$/;
             this.messageErrorPattern = 'Introduzca un número de teléfono válido';
             break;
@@ -59,9 +55,6 @@ class CInputController {
           default:
             this.validation = null;
         }
-
-        this.ngRequired = this.ngRequired != 'true' || angular.isUndefined(this.ngRequired) ? false : true;
-       // this.ngDisabled = this.ngDisabled != 'true' || angular.isUndefined(this.ngDisabled)? false : true;
   }
 }
 export default CInputController;

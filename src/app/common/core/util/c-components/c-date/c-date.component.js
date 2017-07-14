@@ -4,22 +4,22 @@ import controller from './c-date.controller';
 
 const CDateComponent = {
   bindings:{
-          ngModel: '=',
-          ngDisabled: '=?',
-          ngRequired: '@',
-          name: '@',
-          label: '@',
-          minDate: '=?',
-          maxDate: '=?',
-          ngChange: '&',
-          initDate: '<'
+    name: '@',
+    label: '@',
+    ngModel: '=',
+    ngDisabled: '=',
+    ngRequired: '=',
+    minDate: '=?',
+    maxDate: '=?',
+    ngChange: '&',
+    initDate: '<'
   },
   require:{
     form: '^form'
   },
 
   template:`
-      <div class="md-form-group espacio-comprimido">
+      <div class="md-form-group">
        <label class="md-control-label" ng-class="{'requerido':$ctrl.ngRequired}" style="top:-1rem;font-size:11px;">{{$ctrl.label}}</label>
              <div class="input-group">
                 <input type="text"
@@ -41,7 +41,6 @@ const CDateComponent = {
                        min-date="$ctrl.minDate"
                        max-date="$ctrl.maxDate"
                       >
-
             <button type="button" class="btn btn-link p-0 m-0" ng-click="expandirCalendario = !expandirCalendario"><i class="fa fa-calendar"></i></button>
             </div>
             <span class="md-bar" ng-class="{'error':$ctrl.form[$ctrl.name].$invalid && $ctrl.form[$ctrl.name].$touched,'sin-error':!$ctrl.form[$ctrl.name].$invalid}"></span>

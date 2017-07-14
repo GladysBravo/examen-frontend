@@ -10,7 +10,6 @@ class CInputChipsController {
           case 'correo':
             this.messageErrorPattern = 'Introduzca una dirección de correo válido.';
             this.validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-            this.mayuscula='';
             break;
           case 'celular':
             this.validation = /(6[0-9]{7}|7[0-9]{7})/;
@@ -23,7 +22,7 @@ class CInputChipsController {
           default:
            this.validation = null;
         }
-     this.ngRequired = this.ngRequired != 'true' || angular.isUndefined(this.ngRequired) ? false : true;
+    this.maxTags = angular.isUndefined(this.maxTags)?0: this.maxTags;
   }
 }
 export default CInputChipsController;

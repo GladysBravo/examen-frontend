@@ -4,15 +4,16 @@ import controller from './c-input-chips.controller';
 import './c-input.chips.scss';
 const CInputChipsComponent = {
   bindings:{
+    name:'@',
+    label: '@',
     ngModel: '=',
-    ngRequired: '@',
+    ngRequired: '=',
+    ngDisabled: '=',
     ngValidation: '@',
     placeholder: '@',
-    label: '@',
     maxTags: '@',
     minLength: '@',
     maxLength: '@',
-    name:'@'
   },
    require: {
     form: '^form',
@@ -35,8 +36,7 @@ const CInputChipsComponent = {
         required="$ctrl.ngRequired"
         theme="material">
       </tag-me>
-        <label class="md-control-label" ng-class="{'requerido':$ctrl.ngRequired}" style="top:-1rem;font-size:10px;">{{$ctrl.label}}</label>
-         <i class="md-bar" ng-class="{'error':$ctrl.form[$ctrl.name].$invalid && $ctrl.form[$ctrl.name].$touched,'sin-error':!$ctrl.form[$ctrl.name].$invalid}"></i>
+        <label class="md-control-label" ng-class="{'requerido':$ctrl.ngRequired}" style="top:-1rem;font-size:11px;">{{$ctrl.label}}</label>
        <div class="row">
         <div class="col-md-6">
           <div ng-messages="$ctrl.form[$ctrl.name].$error" role="alert">

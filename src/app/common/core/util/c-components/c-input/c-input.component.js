@@ -4,31 +4,28 @@ import controller from './c-input.controller';
 import './c-input.scss';
 const CInputComponent = {
   bindings: {
-      ngModel: '=',
-      ngDisabled: '=?',
-      ngRequired: '@',
-      name: '@',
-      label: '@',
-      placeholder: '@?',
-      ngValidation: '@',
-      ngMinlength: '@',
-      ngMaxlength: '@',
+    name: '@',
+    label: '@',
+    ngModel: '=',
+    ngDisabled: '=',
+    ngRequired: '=',
+    ngValidation: '@',
+    ngMinlength: '@',
+    ngMaxlength: '@',
   },
   require: {
     form: '^form',
   },
-  transclude:true,
   template: `
-     <div class="md-form-group espacio-comprimido ml-1  {{$ctrl.mayuscula}}" md-event-label>
-        <input ng-required="$ctrl.required || $ctrl.ngRequired"
+     <div class="md-form-group" md-event-label>
+        <input name="{{$ctrl.name}}"
+               ng-required="$ctrl.ngRequired"
                ng-disabled="$ctrl.ngDisabled"
-               ng-readonly="$ctrl.readonly || $ctrl.ngReadonly"
+               ng-readonly="$ctrl.ngReadonly"
                ng-model="$ctrl.ngModel"
                ng-pattern="$ctrl.validation"
                ng-minlength="$ctrl.ngMinlength",
                ng-maxlength="$ctrl.ngMaxlength"
-               ng-placeholder="$ctrl.placeholder"
-               name="{{$ctrl.name}}"
                type="text"
                >
         <label class="md-control-label" ng-class="{'requerido':$ctrl.ngRequired}" for="input">{{ $ctrl.label }}</label>
@@ -57,7 +54,6 @@ const CInputComponent = {
     </div>
     </div>`,
   controller
-
 };
 
 export default CInputComponent;

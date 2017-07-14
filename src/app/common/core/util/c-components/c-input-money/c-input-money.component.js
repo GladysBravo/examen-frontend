@@ -3,11 +3,11 @@
 import controller from './c-input-money.controller';
 const CInputMoneyComponent = {
   bindings: {
-      ngModel: '=',
-      ngDisabled: '=?',
-      ngRequired: '@',
       name: '@',
       label: '@',
+      ngModel: '=',
+      ngDisabled: '=',
+      ngRequired: '=',
       placeholder: '@?',
       ngValidation: '@',
       ngMinvalue: '@',
@@ -16,12 +16,13 @@ const CInputMoneyComponent = {
   require: {
     form: '^form',
   },
-  transclude:true,
   template: `
-     <div class="md-form-group espacio-comprimido ml-1  {{$ctrl.mayuscula}}" md-event-label>
-        <input ng-required="$ctrl.required || $ctrl.ngRequired"
+     <div class="md-form-group">
+      <label class="md-control-label" ng-class="{'requerido':$ctrl.ngRequired}" style="top:-1rem;font-size:11px;">{{$ctrl.label}}</label>
+      <div class="input-group">
+        <input ng-required="$ctrl.ngRequired"
                ng-disabled="$ctrl.ngDisabled"
-               ng-readonly="$ctrl.readonly || $ctrl.ngReadonly"
+               ng-readonly="$ctrl.ngReadonly"
                ng-model="$ctrl.ngModel"
                ng-maxlength="$ctrl.ngMaxlength"
                ng-placeholder="$ctrl.placeholder"
@@ -31,7 +32,9 @@ const CInputMoneyComponent = {
                min="$ctrl.ngMinvalue"
                max="$ctrl.ngMaxvalue"
                >
-        <label class="md-control-label" ng-class="{'requerido':$ctrl.ngRequired}" for="input">{{ $ctrl.label }}</label>
+        <button type="button" class="btn btn-link p-0 m-0"><i class="fa fa-money" aria-hidden="true"></i></button>
+      </div>
+      
         <i class="md-bar"></i>
       <div ng-messages="$ctrl.form[$ctrl.name].$error" role="alert">
         <div ng-message="required"  ng-if="$ctrl.form[$ctrl.name].$touched">

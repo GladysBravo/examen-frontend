@@ -13,8 +13,6 @@ class CDateController {
       formatYear: 'yyyy',
       showWeeks: false
     };
-    this.ngRequired = this.ngRequired != 'true' || angular.isUndefined(this.ngRequired) ? false : true;
-   // this.ngDisabled = this.ngDisabled != 'true'? false : true;
   }
   verifyMaxDate(value) {
           if (!angular.isUndefined(this.maxDate)) {

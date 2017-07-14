@@ -4,21 +4,20 @@ import controller from './c-select.controller';
 //import './ui-select.scss';
 const CSelectComponent = {
   bindings: {
-          ngModel: '=',
-          ngChange: '&',
-          onSelect: '&',
-          ngDisabled: '=?',
-          ngRequired: '@',
-          name: '@',
-          label: '@',
-          placeholder: '@',
-          options: '<',
-          field: '@'
+    name: '@',
+    label: '@',
+    placeholder: '@',
+    ngModel: '=',
+    ngChange: '&',
+    onSelect: '&',
+    ngDisabled: '=',
+    ngRequired: '=',
+    options: '<',
+    field: '@'
   },
   require: {
     form: '^form',
   },
-  transclude:true,
   template: `
       <div class="md-form-group espacio-comprimido md-select-group" md-event-label>
           <ui-select name="{{$ctrl.name}}"

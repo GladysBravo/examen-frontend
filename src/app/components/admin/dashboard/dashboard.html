@@ -7,19 +7,19 @@
         <button uib-tooltip="Botón default tooltip" md-effect class="btn btn-default">
           <i class="fa fa-home"></i> Botón default
         </button>
-        <button uib-tooltip="Botón primary tooltip" tooltip-placement="top" md-effect  class="btn btn-primary">
+        <button uib-tooltip="Botón primary tooltip" tooltip-placement="top" md-effect class="btn btn-primary">
           <i class="fa fa-check"></i> Botón primary
         </button>
-        <button uib-tooltip="Botón success tooltip" tooltip-placement="right" md-effect  class="btn btn-success">
+        <button uib-tooltip="Botón success tooltip" tooltip-placement="right" md-effect class="btn btn-success">
           <i class="fa fa-book"></i> Botón success
         </button>
-        <button uib-tooltip="Botón info tooltip" tooltip-placement="bottom" md-effect  class="btn btn-info">
+        <button uib-tooltip="Botón info tooltip" tooltip-placement="bottom" md-effect class="btn btn-info">
           <i class="fa fa-cog"></i> Botón info
         </button>
-        <button uib-tooltip="Botón warning tooltip" tooltip-placement="left" md-effect  class="btn btn-warning">
+        <button uib-tooltip="Botón warning tooltip" tooltip-placement="left" md-effect class="btn btn-warning">
           <i class="fa fa-user-o"></i> Botón warning
         </button>
-        <button uib-tooltip="Botón danger tooltip" md-effect  class="btn btn-danger">
+        <button uib-tooltip="Botón danger tooltip" md-effect class="btn btn-danger">
           <i class="fa fa-automobile"></i> Botón danger
         </button>
       </div>
@@ -65,7 +65,8 @@
       </div>
       <div class="btn-group" uib-dropdown is-open="status.isopen3">
         <button type="button" class="btn btn-secondary">Action</button>
-        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false" uib-dropdown-toggle>
           <span class="sr-only">Toggle Dropdown</span>
         </button>
         <div class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
@@ -157,8 +158,14 @@
       <hr>
 
       <h3>Texto</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, modi, eaque adipisci quia quas accusantium beatae quisquam laudantium ullam laboriosam fuga omnis nesciunt illum quasi maiores? Assumenda consectetur veritatis quod veniam iure aliquid dolorem vitae dolores sit pariatur explicabo ut cumque a eveniet voluptatum reiciendis, fugit ad neque, perspiciatis tempora.</p>
-      <p>Recusandae, est. Vitae asperiores labore ratione aut voluptatum! Recusandae quisquam velit dolorum itaque asperiores eius amet possimus mollitia quos eum ipsum doloremque id explicabo temporibus nihil, commodi soluta sit aut fugit labore voluptatum excepturi iure. Perspiciatis obcaecati minus dicta quod, fugiat illo eligendi sequi, nesciunt ullam, accusantium veritatis praesentium fuga!</p>                
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, modi, eaque adipisci quia quas accusantium beatae
+        quisquam laudantium ullam laboriosam fuga omnis nesciunt illum quasi maiores? Assumenda consectetur veritatis quod
+        veniam iure aliquid dolorem vitae dolores sit pariatur explicabo ut cumque a eveniet voluptatum reiciendis, fugit
+        ad neque, perspiciatis tempora.</p>
+      <p>Recusandae, est. Vitae asperiores labore ratione aut voluptatum! Recusandae quisquam velit dolorum itaque asperiores
+        eius amet possimus mollitia quos eum ipsum doloremque id explicabo temporibus nihil, commodi soluta sit aut fugit
+        labore voluptatum excepturi iure. Perspiciatis obcaecati minus dicta quod, fugiat illo eligendi sequi, nesciunt ullam,
+        accusantium veritatis praesentium fuga!</p>
 
       <h3 class="card-title">Formulario</h3>
       <form>
@@ -278,7 +285,8 @@
       <div class="form-group">
         <label>Fecha</label>
         <div class="input-group">
-          <input type="text" class="form-control" uib-datepicker-popup ng-model="$ctrl.dt" is-open="$ctrl.opened" datepicker-options="$ctrl.dateOptions" ng-required="true" />
+          <input type="text" class="form-control" uib-datepicker-popup ng-model="$ctrl.dt" is-open="$ctrl.opened" datepicker-options="$ctrl.dateOptions"
+            ng-required="true" />
           <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="$ctrl.open()"><i class="fa fa-calendar"></i></button>
           </span>
@@ -292,7 +300,19 @@
       <h3>Otros</h3>
       <p>Ejemplos...</p>
       <h3>C-components</h3>
-      <p>Ejemplos...</p>
+      <hr>
+      <h3>Formulario</h3>
+      <form name="FormEjemplo" novalidate>
+        <c-input name="input_nombre" label="Input" ng-model="$ctrl.inputNombre" ng-required="true"></c-input>
+        <c-input name="input_correo" label="Input Correo" ng-model="$ctrl.inputCorreo" ng-required="true" ng-disabled="false" ng-validation="correo"></c-input>
+        <c-input-money name="input_money" label="Input Money" ng-model="$ctrl.inputMoney" ng-required="true" ng-disabled="false"></c-input-money>
+        <c-textarea name="textarea" label="Textarea" ng-model="$ctrl.textarea" ng-required="true" ng-disabled="false"></c-textarea>
+        <c-select name="select" label="Select" placeholder="Seleccione Item" ng-model="$ctrl.select" ng-required="true" ng-disabled="false" options="$ctrl.items" field="text"></c-select>
+        <c-date name="date" label="Date" ng-model="$ctrl.date" ng-required="true" ng-disabled="false"></c-date>
+        <c-checkbox name="checkbox" label="Checkbox" ng-model="$ctrl.checkbox"></c-checkbox>
+        <c-radiobutton name="radiobutton" label="RadioButton" ng-model="$ctrl.radiobutton" options="$ctrl.items" field="text"></c-radiobutton>
+        <c-input-chips name="inpuchips" label="Input Chips" placeholder="Adicionar Items" ng-model="$ctrl.inputchips" ng-required="true" max-tags="3"></c-input-chips>
+      </form>
     </div>
   </div>
 </div>

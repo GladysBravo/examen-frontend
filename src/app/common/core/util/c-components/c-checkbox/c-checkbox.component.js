@@ -4,12 +4,11 @@ import controller from './c-checkbox.controller';
 
 const CCheckboxComponent = {
   bindings: {
-    ngModel: '=',
     name: '@',
     label: '@',
-    ngDisabled: '=?',
-    ngRequired: '=?',
-    sizeField: '@?'
+    ngModel: '=',
+    ngDisabled: '=',
+    ngRequired: '=',
   },
   require: {
     form: '^form',

@@ -8,10 +8,12 @@ import CCheckboxComponent from './c-checkbox/c-checkbox.component';
 import CRadioButton from './c-radiobutton/c-radiobutton.component';
 import CDateComponent from './c-date/c-date.component';
 import CInputChipsComponent from './c-input-chips/c-input-chips.component';
-import NoIncluyeDirective from './c-input/no-incluye.directive';
+
+// libreria mascara para el date
+import uiMask from 'angular-ui-mask';
 
 const UiComponentsModule = angular
-    .module('app.ccomponents', [])
+    .module('app.ccomponents', [uiMask])
     .component('cInput', CInputComponent)
     .component('cInputMoney',CInputMoneyComponent)
     .component('cSelect',CSelectComponent)
@@ -20,7 +22,6 @@ const UiComponentsModule = angular
     .component('cTextarea',CTextAreaComponent)
     .component('cDate',CDateComponent)
     .component('cInputChips',CInputChipsComponent)
-    .directive('noIncluye', () => new NoIncluyeDirective())
     .name;
 
 export default UiComponentsModule;
