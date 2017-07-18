@@ -2,7 +2,6 @@
 
 import selectDate from './selectDate/selectDate.component';
 import selectMunicipio from './selectMunicipio/selectMunicipio.component';
-import localizacion from './localizacion/localizacion.component';
 import documentoIdentidad from './documentoIdentidad/documentoIdentidad.component';
 import selectParametro from './selectParametro/selectParametro.component';
 import uibSelect from './uib-select/uib-select.component';
@@ -14,7 +13,6 @@ const MaterialModule = angular
     ])    
     .component('selectDate', selectDate)
     .component('selectMunicipio', selectMunicipio)
-    .component('localizacion', localizacion)
     .component('documentoIdentidad', documentoIdentidad)
     .component('selectParametro', selectParametro)
     .component('uibSelect', uibSelect)
