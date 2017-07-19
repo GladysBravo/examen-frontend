@@ -4,6 +4,6 @@
   "debug": true,
   "onbeforeunload": false,
   "port": 3100,
-  "subDomain": "/probolivia/",
+  "subDomain": "/app/",
   "portDev": 8080
 }
