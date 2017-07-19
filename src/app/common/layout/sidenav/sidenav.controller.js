@@ -2,7 +2,7 @@
 
 class SidenavController {
 
-    constructor($location, Storage, Util, BreadcrumbFactory, SidenavFactory, Auth, systemName) {
+    constructor($location, Storage, Util, BreadcrumbFactory, SidenavFactory, Auth, systemName, Filter) {
         "ngInject";
 
         this.$location = $location;
@@ -11,6 +11,7 @@ class SidenavController {
         this.BreadcrumbFactory = BreadcrumbFactory;
         this.SidenavFactory = SidenavFactory;
         this.Auth = Auth;
+        this.Filter = Filter;
         this.systemName = systemName;
     }
 
@@ -49,9 +50,11 @@ class SidenavController {
             if (el) {
                 el.classList.remove('active');
             }
-            el = document.querySelector(`#sidenav-menu .sidenav-submenu-item[data-url=${url}]`);
-            if (el) {
-                el.classList.add('active');
+            if (!this.Filter.empty(url)) {
+                el = document.querySelector(`#sidenav-menu .sidenav-submenu-item[data-url=${url}]`);
+                if (el) {
+                    el.classList.add('active');
+                }
             }
             this.$location.path(url);
         }
