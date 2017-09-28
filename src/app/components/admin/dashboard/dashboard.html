@@ -1,7 +1,7 @@
 <div class="container">
   <h2 class="page-title"><i class="fa fa-cogs"></i> Ejemplos de <strong>Componentes</strong></h2>
   <div class="card">
-    <div class="card-block">
+    <div class="card-body">
       <h3>Botones</h3>
       <div>
         <button uib-tooltip="Botón default tooltip" md-effect class="btn btn-default">
@@ -300,7 +300,7 @@
 
       <h3>Loading bar</h3>
       <div>
-        <p><strong class="text-danger">Nota.-</strong> Por defecto para cada petición se muestra el loading bar automáticamente, pero si se quiere un control manual usar estas opciones:</p> 
+        <p><strong class="text-danger">Nota.-</strong> Por defecto para cada petición se muestra el loading bar automáticamente, pero si se quiere un control manual usar estas opciones:</p>
         <button class="btn btn-primary" type="button" ng-click="$ctrl.loadingInit()">Iniciar loading</button>
         <button class="btn btn-primary" type="button" ng-click="$ctrl.loadingInitText()">Iniciar loading con texto</button>
         <button class="btn btn-primary" type="button" ng-click="$ctrl.loadingInitLocked()">Iniciar loading con texto en pantalla completa</button>
@@ -314,7 +314,7 @@
         <p>Texto de ayuda (top) <ui-help message="$ctrl.helpLang.ejemplo" direction="top"></ui-help></p>
         <p>Texto de ayuda (right) <ui-help message="$ctrl.helpLang.ejemplo" direction="right"></ui-help></p>
         <p>Texto de ayuda (bottom) <ui-help message="$ctrl.helpLang.ejemplo" direction="bottom"></ui-help></p>
-        <p>Texto de ayuda (left) <ui-help message="$ctrl.helpLang.ejemplo" direction="left"></ui-help></p>        
+        <p>Texto de ayuda (left) <ui-help message="$ctrl.helpLang.ejemplo" direction="left"></ui-help></p>
       </div>
       <hr>
 
@@ -336,7 +336,7 @@
         </div>
       </div>
       <hr>
-  
+
       <h3>Componentes Material</h3>
       <form name="FormEjemplo" novalidate>
         <c-input name="input_nombre" label="Input" ng-model="$ctrl.inputNombre" ng-required="true"></c-input>

@@ -1,24 +1,34 @@
-<nav class="navbar">
-    <div class="d-flex justify-content-between">
-        <div class="form-inline navbar-buttons">
-            <button type="button" class="btn btn-link" ng-click="$ctrl.toggleSidenav()">
-                <i class="fa fa-bars"></i>
-            </button>
-            <button type="button" class="btn btn-link" ng-click="$ctrl.refresh()">
-                <i class="fa fa-refresh"></i>
-            </button>
-            <button type="button" class="btn btn-link" ng-click="$ctrl.fullscreen()">
-                <i class="fa fa-arrows-alt"></i>
-            </button>        
-            <button type="button" class="btn btn-link">
-                <i class="fa fa-bell-o"></i>
-            </button>            
-            <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Escriba su búsqueda aquí">
-            </div>        
-        </div>
-        <div class="navbar-nav navbar-buttons">
+<nav class="navbar navbar-expand-lg">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <button type="button" class="btn btn-link" ng-click="$ctrl.toggleSidenav()">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="btn btn-link" ng-click="$ctrl.refresh()">
+                    <i class="fa fa-refresh"></i>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="btn btn-link" ng-click="$ctrl.fullscreen()">
+                    <i class="fa fa-arrows-alt"></i>
+                </button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="btn btn-link">
+                    <i class="fa fa-bell-o"></i>
+                </button>
+            </li>
+            <li class="nav-item">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Escriba su búsqueda aquí">
+                </div>
+            </li>
+        </ul>
+        <div class="navbar-nav navbar-buttons my-2 my-lg-0">
             <div class="nav-item dropdown" uib-dropdown is-open="status.isopen">
                 <a id="single-button" href="" class="nav-link" uib-dropdown-toggle>
                     <i class="fa fa-ellipsis-v"></i>

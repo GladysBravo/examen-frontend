@@ -13,7 +13,7 @@
         padding-left: 0;
 
         .footer {
-            text-align: center;            
+            text-align: center;
         }
     }
 }
@@ -36,7 +36,7 @@
 }
 
 .login {
-     
+
 }
 
 .login-container {
@@ -100,7 +100,7 @@
         padding: 1.5rem 3rem;
         font-size: 1.5rem;
     }
-    .card-block {
+    .card-body {
         padding: 1rem 3rem 2rem;
     }
 }
@@ -139,14 +139,14 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    
+
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     -ms-backface-visibility:hidden;
     backface-visibility: hidden;
 }
 .card-flip .front {
-    background-color: white;    
+    background-color: white;
     width: 100%;
     padding: 0px 30px 25px 30px;
 }
@@ -155,9 +155,9 @@
     -moz-transform: rotateY(180deg);
     -ms-transform: rotateY(180deg);
     transform: rotateY(180deg);
-    
+
     background: #F0F0F0;
-    font-family: Helvetica, Verdana, Arial;    
+    font-family: Helvetica, Verdana, Arial;
     padding: 0px 30px 25px 30px;
     position: relative;
     width: 100%;
@@ -167,7 +167,7 @@
         margin: 15px -15px 0px -15px;
         font-size: .9rem;
     }
-    
+
     .login-link {
         bottom: 25px;
         font-family: Montserrat, Arial, Helvetica, sans-serif;
