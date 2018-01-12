@@ -6,7 +6,7 @@ class UserController {
     }
 
     $onInit() {
-        this.url = 'rest/users/';
+        this.url = 'usuario/';
         this.title = 'Usuario';
 
         /**

@@ -1,0 +1,27 @@
+<ng-form name="form">
+  <div class="modal-header">
+    <h5 class="modal-title">
+      <i class="fa fa-question-circle"></i>
+      CANCELAR RESERVA
+    </h5>
+    <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body modal-ubicacion-body">
+
+    <div class="panel-margin">
+      <p>Desea CANCELAR la Reserva?</p>
+      <p style="font-size: 18px;"><br><strong>Nota.-</strong> Si continúa se deshabilitara la reserva</p>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button md-effect type="button" class="btn btn-danger" ng-click="$ctrl.cancel()">
+      <i class="fa fa-close"></i> Cancelar
+    </button>
+    <button md-effect type="button" class="btn btn-primary" ng-click="$ctrl.modificarReserva()">
+      <i class="fa fa-check"></i> Aceptar
+    </button>
+  </div>
+</ng-form>

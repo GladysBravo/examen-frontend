@@ -26,8 +26,9 @@ class AuthService {
         }
         this.$auth.login(data)
         .then(response => {
-            let user = response.data.user;
-            let menu = response.data.menu;
+          this.$log.log('\n\n\n\n response--- ', response.data);
+            let user = response.data.datos.usuario;
+            let menu = response.data.datos.menu;
             let rol = user.id_rol;
             data.path = data.path || 'dashboard';
             let pathRedirect = response.data.path || data.path;

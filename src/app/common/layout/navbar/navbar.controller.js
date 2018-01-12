@@ -1,13 +1,14 @@
 'use strict';
 
 class NavbarController {
-    constructor($state, Util, Auth, $log) {
+    constructor($state, Util, Auth, $log, Sidenav) {
         "ngInject";
 
         this.$state = $state;
         this.Util = Util;
         this.Auth = Auth;
         this.$log = $log;
+        this.Sidenav = Sidenav;
     }
 
     $onInit() {

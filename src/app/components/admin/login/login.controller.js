@@ -2,14 +2,15 @@
 
 class LoginController {
 
-    constructor($rootScope, Storage, Message, timeSessionExpired, Auth) {
+    constructor($rootScope, Storage, Message, timeSessionExpired, Auth, $location) {
         'ngInject';
-        
+
         this.$rootScope = $rootScope;
         this.Storage = Storage;
         this.Message = Message;
         this.Auth = Auth;
         this.timeSessionExpired = timeSessionExpired;
+        this.$location = $location;
     }
 
     $onInit() {

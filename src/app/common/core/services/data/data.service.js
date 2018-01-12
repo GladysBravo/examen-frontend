@@ -3,7 +3,7 @@
 
 class DataService {
 
-  constructor($http, $q, $location, $sce, DataServiceConfig, HTTPCanceler, Message, Util, apiUrl, appName, errorsLang, debug, $log, Storage) {
+  constructor($http, $q, $location, $sce, DataServiceConfig, HTTPCanceler, Message, Util, apiUrl, appName, errorsLang, debug, $log, Storage, apiUrlPublic) {
     'ngInject';
 
     this.$http = $http;
@@ -16,6 +16,7 @@ class DataService {
     this.HTTPCanceler = HTTPCanceler;
     this.canceler = this.HTTPCanceler.get(this.defer, this.appName);
     this.apiUrl = apiUrl;
+    this.apiUrlPublic = apiUrlPublic;
     this.errorsLang = errorsLang;
     this.appName = appName;
     this.Storage = Storage;
@@ -39,10 +40,11 @@ class DataService {
   }
 
   options(url) {
-    return this._http('get', url + '/fields');
+    return this._http('get', url);
   }
 
   get(url, id) {
+    this.$log.log('------------- urk ', url)
     return this._http('get', url, id);
   }
 

@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      {{$ctrl.title}}
+    </div>
+    <div class="card-body">
+      <!-- Texto de mi card -->
+      <button uib-tooltip="tramite" md-effect class="btn btn-primary btn-lg" ng-click="$ctrl.nuevaReserva()"
+        <i class="fa fa-eye text-secondary"></i>NUEVO RESERVA
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="card-block">
+        <div class="table-responsive" ng-table="$ctrl.tableParams">
+          <table class="table table-condensed table-striped table-hover" id="example" >
+              <tr ng-repeat="item in $ctrl.ongs" ng-if="item.estado != 'CANCELADO'">
+                <td data-title="'Acciones'">
+                  <button uib-tooltip="Cancelar Reserva" md-effect class="btn btn-default" ng-click="$ctrl.irDetalles(item)">
+                    <i class="fa fa-question-circle"></i>
+                  </button>
+                 </td>
+                 <td data-title="'Sala'">{{item.sala.nombre}}</td>
+                <td data-title="'Fecha Reserva'">{{item.fecha_reserva | date:'dd/MM/yyyy'}}</td>
+                <td data-title="'Hora inicio'">{{item.hora_inicio}}</td>
+                <td data-title="'Hora fin'">{{item.hora_fin}}</td>
+                <td data-title="'Estado'">{{item.estado}}</td>
+              </tr>
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

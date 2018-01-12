@@ -14,6 +14,7 @@ const Config = angular
   .constant('PageNoLogin', ['login']) // Rutas que no requieren autenticación
   .constant('authUrl', `${config.serverAuth}/autenticar/`) // URL para autenticacion
   .constant('apiUrl', `${server}/api/v1/`) // Rest principal del sistema
+  .constant('apiUrlPublic', `${server}/public/`) // Rest principal del sistema
   .constant('baseUrl', `${server}/`) // Ruta base
   .name;
 

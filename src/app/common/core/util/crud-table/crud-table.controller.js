@@ -186,7 +186,7 @@ class CrudTableController {
     }
 
     getData() {
-        if (this.data && this.data.list && this.Util.toType(this.data.list) == 'array') {            
+        if (this.data && this.data.list && this.Util.toType(this.data.list) == 'array') {
             let data = { dataset: this.filterItems(this.data.list) };
             let config = {};
             if (this.pagination === false || this.pagination === 'false') {

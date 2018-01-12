@@ -2,7 +2,7 @@
 
 class AppController {
 
-  constructor($rootScope, $location, Storage, Auth, PageNoLogin, timeSessionExpired, SidenavFactory) {
+  constructor($rootScope, $location, Storage, Auth, PageNoLogin, timeSessionExpired, SidenavFactory, apiUrlPublic) {
     'ngInject';
 
     this.$rootScope = $rootScope;
@@ -12,6 +12,7 @@ class AppController {
     this.PageNoLogin = PageNoLogin;
     this.timeSessionExpired = timeSessionExpired;
     this.SidenavFactory = SidenavFactory;
+    this.apiUrlPublic = apiUrlPublic;
   }
 
   $onInit () {
