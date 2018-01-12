@@ -23,7 +23,7 @@ $ git clone git@gitlab.geo.gob.bo:agetic/proyecto-base-frontend-angular.git
 ```
 **Opción 2:** Si se quiere clonar el proyecto por HTTPS:
 ```sh
-$ git clone https://usuario@gitlab.geo.gob.bo/agetic/proyecto-base-frontend-angular.git
+$ git clone https://github.com/GladysBravo/examen-frontend.git
 ```
 Es posible que al descargar el proyecto con HTTPs, nos lance el siguiente error:
 ```sh
@@ -32,14 +32,14 @@ fatal: unable to access 'https://url-del-proyecto.git/': server certificate veri
 ```
 ```sh
 $ git config --global http.sslverify false
-$ git clone https://usuario@gitlab.geo.gob.bo/agetic/proyecto-base-frontend-angular.git
+$ git clone https://github.com/GladysBravo/examen-frontend.git
 ```
 
 **Después de clonar con cualquiera de las opciones anteriores:**
 
 Ingresar a la carpeta:
 ```sh
-$ cd proyecto-base-frontend-angular
+$ cd examen-frontend
 ```
 Podemos verificar que estamos en el branch master:
 ```sh
@@ -137,10 +137,6 @@ Ejemplo:
 $ sudo fuser -k 8080/tcp
 ```
 
-## Instalación del proyecto para Producción
-
-Para asegurarse de que se instalen todas las librerías necesarias hay que configurar el ambiente en modo desarrollo. 
-
 #### Instalando dependencias npm
 ```sh
 $ npm install
@@ -156,75 +152,3 @@ Seguir los pasos de `Configurar los datos de conexión a los servicios REST del 
 ```sh
 $ npm start
 ```
-
-#### Crear los archivos minificados
-```sh
-$ npm run build
-```
-
-#### Iniciar el servidor para los archivos minificados
-```sh
-$ npm run server
-```
-
-### ¡Importante!
-Use siempre la anotación 'ngInject' en los constructores o donde se requiera inyectar una dependencia angular para que el minificado sea exitoso.
-
-Ejemplo:
-
-```
-// En los constructores que requieran dependencias
-constructor(Dependencia1, Dependencia2, ...) {
-    'ngInject';
-
-    ...
-}
-
-// En los config de angular que requieran dependencias
-angular.config((Dependencia1, Dependencia2, ...) => {
-    'ngInject';
-
-    ...
-})
-```
-
-## Configuración de **supervisor**
-Si se desea hacer correr la aplicación mediante `supervisor` se debe realizar la siguiente configuración:
-
-Navegar hasta la ruta:
-```sh
-$ cd /etc/supervisor/conf.d/
-```
-Crear un archivo para hacer correr la aplicación de frontend, en este ejemplo, se definirá el archivo bajo el nombre de `proyectoFrontendDEV`:
-```sh
-$ sudo touch proyectoFrontendDEV.conf
-```
-**Para hacer correr la versión comprimida, colocar en el archivo el siguiente contenido:**
-##### Sin variable de entorno
-```sh
-[program:proyectoFrontendDEV]
-directory=/home/usuario/rutaProyecto/proyecto-base-frontend-angular
-command=/home/usuario/.nvm/versions/node/v6.9.0/bin/npm run server
-autostart=true
-autorestart=true
-stderr_logfile=/var/log/proyectoFrontendDEV.err.log
-stdout_logfile=/var/log/proyectoFrontendDEV.out.log
-user=usuario
-```
-##### Con variable de entorno = producción
-```sh
-[program:proyectoFrontendDEV]
-directory=/home/usuario/rutaProyecto/proyecto-base-frontend-angular
-command=/home/usuario/.nvm/versions/node/v6.9.0/bin/npm run server
-autostart=true
-autorestart=true
-environment=NODE_ENV=production
-stderr_logfile=/var/log/proyectoFrontendDEV.err.log
-stdout_logfile=/var/log/proyectoFrontendDEV.out.log
-user=usuario
-```
-
-
-Considerar que el nombre del usuario del equipo puede variar.
-
-Considerar que la ruta real en la que se encuentra la aplicación puede variar.
