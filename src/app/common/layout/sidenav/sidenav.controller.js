@@ -18,7 +18,7 @@ class SidenavController {
     $onInit() {
         let color = ['info', 'success', 'danger', 'warning', 'primary'];
 
-        this.url = this.$location.path().replace('/', '');
+        this.url = this.$location.path().replace('/solicitudes', '');
 
         if(this.Storage.existUser()) {
             this.SidenavFactory.setUser(this.Storage.getUser());
@@ -70,7 +70,7 @@ class SidenavController {
             user = user.usuario || user.username;
             if (user && user.split('@').length > 1) {
                 user = user.split('@')[0];
-            }            
+            }
             return user;
         }
         return "";
@@ -82,7 +82,7 @@ class SidenavController {
 
     getInitial() {
         var firstName;
-        if (this.SidenavFactory.getUser().usuario) {                    
+        if (this.SidenavFactory.getUser().usuario) {
             firstName = this.SidenavFactory.getUser().usuario;
             return firstName.length ? firstName[0].toUpperCase() : '?';
         } else if (this.SidenavFactory.getUser().username) {
